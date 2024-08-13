@@ -1,6 +1,6 @@
 # Gerenciador de Investimentos
 
-Este projeto é um programa para gerenciar seus investimentos, incluindo ações, fundos imobiliários e renda fixa. O sistema oferece funcionalidades CRUD (Criar, Ler, Atualizar, Excluir) para ajudar a acompanhar o desempenho dos seus investimentos.
+Este projeto é um programa para gerenciar seus investimentos, incluindo ações, fundos imobiliários, moedas, renda fixa e criptomoedas. O sistema oferece funcionalidades CRUD (Criar, Ler, Atualizar, Excluir) para ajudar a acompanhar o desempenho dos seus investimentos.
 
 ## Funcionalidades
 
