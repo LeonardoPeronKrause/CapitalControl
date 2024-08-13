@@ -1,6 +1,6 @@
 # Gerenciador de Investimentos
 
-Este projeto é um programa para gerenciar seus investimentos, incluindo ações, fundos imobiliários, moedas, renda fixa e criptomoedas. O sistema oferece funcionalidades CRUD (Criar, Ler, Atualizar, Excluir) para ajudar a acompanhar o desempenho dos seus investimentos.
+CapitalControl é um programa completo para gerenciar e monitorar seus investimentos em ações, fundos imobiliários, moedas, renda fixa e criptomoedas. Com uma interface amigável e intuitiva, ele oferece funcionalidades CRUD (Criar, Ler, Atualizar, Excluir), facilitando o acompanhamento do desempenho de seus investimentos. Além disso, o sistema é integrado a uma API de cotações em tempo real, garantindo que você sempre tenha as informações mais atualizadas para tomar decisões informadas.
 
 ## Funcionalidades
 
