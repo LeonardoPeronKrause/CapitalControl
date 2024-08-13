@@ -4,9 +4,9 @@ CapitalControl é um programa completo para gerenciar e monitorar seus investime
 
 ## Funcionalidades
 
-- **Cadastro de Investimentos**: Adicione novas ações, fundos imobiliários e aplicações de renda fixa.
-- **Atualização de Investimentos**: Atualize informações como preço médio, preço atual e calcule a porcentagem de ganho ou perda.
-- **Visualização de Investimentos**: Consulte todos os investimentos cadastrados com detalhes de preço médio, preço atual e o status de ganho ou perda.
+- **Cadastro de Investimentos**: Adicione novas ações, fundos imobiliários e aplicações de renda fixa, etc.
+- **Atualização de Investimentos**: Atualize informações como preço médio, preço atual, calcule a porcentagem de ganho ou perda, etc.
+- **Visualização de Investimentos**: Consulte todos os investimentos cadastrados com detalhes de preço médio, preço atual, status de ganho ou perda, etc.
 - **Exclusão de Investimentos**: Remova investimentos que não são mais necessários ou desejados.
 
 ## Tecnologias Utilizadas
@@ -45,10 +45,14 @@ CapitalControl é um programa completo para gerenciar e monitorar seus investime
 - **Relatórios Financeiros**: Geração de relatórios detalhados sobre o desempenho dos investimentos.
 - **Notificações**: Alertas personalizados para variações de preço significativas.
 - **Integração com APIs Financeiras**: Obtenha dados de mercado em tempo real.
+- **Cadastro de Dividendos**: Adicione e gerencie informações de dividendos recebidos.
+- **Gráficos Mensais de Dividendos**: Visualize os dividendos recebidos mês a mês com gráficos.
+- **Gráficos de Alocação por Categoria de Ativo**: Exiba a porcentagem de alocação em cada categoria de ativo (ações Brasil, BDR, FII, FIAGRO, ETF, criptomoeda, renda fixa).
+- **Gráficos de Rentabilidade e Crescimento da Carteira**: Mostre a rentabilidade e o crescimento 
 
 ## Contribuição
 
-Contribuições são bem-vindas! Sinta-se à vontade para enviar um pull request ou abrir uma issue para sugestões de melhorias.
+Acesso restrito
 
 ## Licença
 
