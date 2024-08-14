@@ -48,7 +48,9 @@ CapitalControl é um programa completo para gerenciar e monitorar seus investime
 - **Cadastro de Dividendos**: Adicione e gerencie informações de dividendos recebidos.
 - **Gráficos Mensais de Dividendos**: Visualize os dividendos recebidos mês a mês com gráficos.
 - **Gráficos de Alocação por Categoria de Ativo**: Exiba a porcentagem de alocação em cada categoria de ativo (ações Brasil, BDR, FII, FIAGRO, ETF, criptomoeda, renda fixa).
-- **Gráficos de Rentabilidade e Crescimento da Carteira**: Mostre a rentabilidade e o crescimento 
+- **Gráficos de Rentabilidade e Crescimento da Carteira**: Mostre a rentabilidade e o crescimento.
+- **Cryptografia nas Senhas**: Adicionar um API de cryptografia para maior segurança das senhas.
+- **Utilização de Tokens**: Usar tokens JWT (JSON Web Tokens) para gerenciar a sessão do usuário e facilitar a autenticação nas próximas requisições.
 
 ## Contribuição
 
