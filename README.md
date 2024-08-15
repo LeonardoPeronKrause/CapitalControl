@@ -51,6 +51,7 @@ CapitalControl é um programa completo para gerenciar e monitorar seus investime
 - **Gráficos de Rentabilidade e Crescimento da Carteira**: Mostre a rentabilidade e o crescimento.
 - **Cryptografia nas Senhas**: Adicionar uma API de cryptografia para maior segurança das senhas.
 - **Utilização de Tokens**: Usar tokens JWT (JSON Web Tokens) para gerenciar a sessão do usuário e facilitar a autenticação nas próximas requisições.
+- **Cadastro de Stocks**: Além de cadastrar BDR's (ações americanas listadas no Ibovespa), ter a opção de cadastrar Stocks, que são acões negociadas diretamente na bolsa americana.
 
 ## Contribuição
 
