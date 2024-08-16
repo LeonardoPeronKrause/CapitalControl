@@ -1,6 +1,5 @@
 'use strict';
 
-const { Console } = require('console');
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -10,21 +9,29 @@ const rl = readline.createInterface({
 
 const exibirMenu = function () {
     rl.question('1. Cadastrar um novo ativo. \n2. Editar ativos.\n3. Visualizar Ativos.\n4. Excluir Ativo. \n5. Fazer Backup\n6. Sair.\n\n Qual opção você deseja utilizar? ', function (opcao) {
-        if (opcao === '1') {
-            cadastrarAtivo();
-        } else if (opcao === '2') {
-            editarAtivo();
-        } else if (opcao === '3') {
-            verAtivos();
-        } else if (opcao === '4') {
-            excluirAtivo();
-        } else if (opcao === '5') {
-            fazerBackup();
-        } else if (opcao === '6') {
-            sair();
-        } else {
-            console.log('Opção inválida. Tente novamente...')
-            exibirMenu();
+        switch (opcao) {
+            case '1':
+                cadastrarAtivo();
+                break;
+            case '2':
+                editarAtivo();
+                break;
+            case '3':
+                verAtivos();
+                break;
+            case '4':
+                excluirAtivo();
+                break;
+            case '5':
+                fazerBackup();
+                break;
+            case '6':
+                sair();
+                break;
+            default:
+                console.log('Opção inválida. Tente novamente...')
+                exibirMenu();
+                break;
         }
     })
 };
