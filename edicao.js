@@ -17,7 +17,7 @@ const editarAtivo = function() {
                                     return exibirMenu();
                             }    
 
-                            if (results.lenght === 0) {
+                            if (results.length === 0) {
                                 console.log('Nenhuma ação brasileira cadastrada até o momento!')
                                 return exibirMenu();
                             }
@@ -30,7 +30,7 @@ const editarAtivo = function() {
                             rl.question('Qual o número da ação que você deseja editar? ', function(numero) {
                                 const index = parseInt(numero) - 1;
 
-                                if (index >= 0 && index < results.lenght) {
+                                if (index >= 0 && index < results.length) {
                                     const acaoSelecionada = results[index];
 
                                     console.log('Se você deixar em branco, os valores não alterarão!');
@@ -60,7 +60,7 @@ const editarAtivo = function() {
 
                                                         if (novoSetor.trim() !== '') {
                                                             updates.push('setor = ?');
-                                                            params.trim(novoSetor);
+                                                            params.push(novoSetor);
                                                         }
 
                                                         if (novaQuantidade.trim() !== '') {
@@ -95,6 +95,135 @@ const editarAtivo = function() {
                             })
                         });
                         break;
+                        case '2':
+                            const queryFii = 'SELECT * FROM fii';
+                            db.query(queryFii, (err, results) => {
+                                if (err) {
+                                    console.log('Erro ao buscar dados de Fundos Imobiliários!');
+                                    return exibirMenu();
+                                };
+
+                                if (results.length === 0) {
+                                    console.log('Nenhum fundo imobiliário cadastrado até o momento!')
+                                    return exibirMenu();
+                                }
+
+                                console.log('Fundos Imobiliários disponíveis para edição: ');
+                                results.forEach((queryFii, index) => {
+                                    console.log(`${index+1}. ${queryFii.nome} (${queryFii.ticker}) Preço Médio: ${queryFii.pm} Setor: ${queryFii.setor} Quantidade: ${queryFii.quatidade}.`);
+                                });
+
+                                rl.question('Qual o número do Fundos Imobiliário que você deseja editar? ', function(numero) {
+                                    const index = parseInt(numero) - 1;
+
+                                    if (index >= 0 && index < results.length) {
+                                        const acaoSelecionada = results[index];
+
+                                        console.log('Se você deixar em branco, os valores não alterarão!');
+                                        rl.question('Qual o novo nome do fundo imoboliário? ', function(novoNome) {
+                                            rl.question('Qual o novo TICKER do fii? ', function(novoTicker) {
+                                                rl.question('Qual o novo preço médio de compra? ', function(novoPm) {
+                                                    rl.question('Qual o novo setor do fii? ', function(novoSetor) {
+                                                        rl.question('Qual a nova quantidade de cotas? ', function(novaQuantidade) {
+
+                                                            const updates = [];
+                                                            const params = [];
+
+                                                            if (novoNome.trim() !== '') {
+                                                                updates.push('nome = ?');
+                                                                 params.push(novoNome);
+                                                            }
+
+                                                            if (novoTicker.trim() !== '') {
+                                                                updates.push('ticker = ?');
+                                                                params.push(novoTicker);
+                                                            }
+
+                                                            if (novoPm.trim() !== '') {
+                                                                updates.push('pm = ?');
+                                                                params.push(novoPm);
+                                                            }
+
+                                                            if (novoSetor.trim() !== '') {
+                                                                updates.push('setor = ?');
+                                                                params.push(novoSetor);
+                                                            }
+
+                                                            if (novaQuantidade.trim() !== '') {
+                                                                updates.push('quantidade = ?');
+                                                                params. push(novaQuantidade);
+                                                            }
+
+                                                            if (updates.length > 0) {
+                                                                params.push(fiiSelecionado.id) // Add o ID do FII para clausula WHERE
+                                                                const uptadeQuery = `UPDATE fii SET ${updates.join(', ')} WHERE id = ?`;
+                                                                db.query(uptadeQuery, params, (err) => {
+                                                                    if (err) {
+                                                                        console.log('Erro ao atualizar o fundo imobiliário: ', err.message);
+                                                                    } else {
+                                                                        console.log('O FII foi atualizado com sucesso!');
+                                                                    }
+                                                                    exibirMenu();
+                                                                });
+                                                            } else {
+                                                                console.log('Nenhuma atualização realizada.');
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    } else {
+                                        console.log('Número inválido. Tente novamente.');
+                                        exibirMenu();
+                                    }
+                                })
+                            });
+                            break;
+
+                        case '3':
+                            const queryBdr = 'SELECT * FROM bdr';
+                            db.query(queryBdr, (err, results) => {
+                                if (err) {
+                                    console.log('Erro ao buscar dados de Ações Americanas.', err.message);
+                                    return exibirMenu();
+                                }
+
+                                if (results.length === 0) {
+                                    console.log('Nenhuma ação americana cadastrada ate o momento!');
+                                    return exibirMenu();
+                                }
+
+                                console.log('Ações Americanas disponíveis para edição:');
+                                results.forEach((queryBdr, index) => {
+                                    console.log(`${index+1}. ${queryBdr.nome} (${queryBdr.ticker}) Preço Médio: ${queryBdr.pm} Setor: ${queryBdr.setor} Quantidade: ${queryBdr.quatidade}`);
+                                });
+
+                                rl.question('Qual o número da ação americana que você deseja editar? ', function(numero) {
+                                    const index = parseInt(numero) - 1;
+
+                                    if (index >= 0 && index < results.length) {
+                                        const bdrSelecionada = results[index];
+
+                                        console.log('Se você deixar em branco, os valores não alterarão!');
+                                        rl.question('Qual o novo nome da ação americana? ', function(novoNome) {
+                                            rl.question('Qual o novo ticker? ', function(novoTicker) {
+                                                rl.question('Qual o novo preço médio de compra? ', function(novoPm) {
+                                                    rl.question('Qual o novo setor? ', function(novoSetor) {
+                                                        rl.question('Qual a nova quantidade de cotas? ', function(novaQuantidade) {
+
+                                                            const updates = []; ; // Armazena as colunas que serão utilizada
+                                                            const params = []; ; // Armazena os valores das colunas
+
+
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    }
+                                });
+                            });
                     }
                 })
         }
