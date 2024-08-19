@@ -1,4 +1,6 @@
-// const db...
+'use strict';
+
+const db = require('./database');
 
 const editarAtivo = function() {
     console.log('Função de editar ativo ainda não implementada.');

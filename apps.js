@@ -1,10 +1,11 @@
 'use strict';
 
 const readline = require('readline');
-const cadastro = require('./cadastro.js');
-const edicao = require('./edicao.js');
-const exclusao = require('./exclusao.js');
-const backup = require('./backup.js');
+const { cadastrarAtivo } = require('./cadastro.js');
+const { editarAtivo } = require('./edicao.js');
+const { verAtivos } = require('./visualizacao.js');
+const { excluirAtivo } = require('./exclusao.js');
+const { fazerBackup } = require('./backup.js');
 
 const rl = readline.createInterface({
     input: process.stdin,

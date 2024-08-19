@@ -1,4 +1,6 @@
-// const db...
+'use strict';
+
+const db = require('./database');
 
 const verAtivos = function() {
     rl.question('1. Renda Variável\n2. Renda Fixa\nQual investimento você quer ver: ', function(opcao) {

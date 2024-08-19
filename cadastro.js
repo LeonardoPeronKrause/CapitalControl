@@ -1,6 +1,8 @@
-//const db = require('./database')
+'use strict';
 
-const cadastrarAtivo = function() {
+const db = require('./database');
+
+const cadastrarAtivo = function(rl) {
     rl.question('1. Renda Variável\n2. Renda Fixa\nQual a categoria de ativo que você deseja cadastrar?', function(opcao) {
         switch (opcao) {
             case '1':
