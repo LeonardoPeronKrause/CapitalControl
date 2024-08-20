@@ -16,7 +16,7 @@ const verAtivos = function() {
                                 } else {
                                     console.log('Dados das ações:', results);
                                 }
-                                exibirMenu();
+                                exibirMenu(rl);
                             });
                             break;
                         case '2':
@@ -27,7 +27,7 @@ const verAtivos = function() {
                                 } else {
                                     console.log('Dados dos Fundos Imobiliários:', results);
                                 }
-                                exibirMenu();
+                                exibirMenu(rl);
                             });
                             break;
                         case '3':
@@ -38,7 +38,7 @@ const verAtivos = function() {
                                 } else {
                                     console.log('Dados das Ações americanas: ', results);
                                 }
-                                exibirMenu();
+                                exibirMenu(rl);
                             });
                             break;
                         case '4':
@@ -49,12 +49,12 @@ const verAtivos = function() {
                                 } else {
                                     console.log('Dados das Criptomoedas: ', results);
                                 }
-                                exibirMenu();
+                                exibirMenu(rl);
                             });
                             break;
                         default:
                             console.log('Opção inválida. Tente novamente...');
-                            verAtivos(); // Chama verAtivos novamente para permitir ao usuário tentar outra opção.
+                            verAtivos(rl); // Chama verAtivos novamente para permitir ao usuário tentar outra opção.
                             break;
                     }
                 });
@@ -70,7 +70,7 @@ const verAtivos = function() {
                                 } else {
                                     console.log('Dados de Selic: ', results);
                                 }
-                                exibirMenu();
+                                exibirMenu(rl);
                             });
                             break;
                         case '2':
@@ -81,7 +81,7 @@ const verAtivos = function() {
                                 } else {
                                     console.log('Dados de IPCA: ', results);
                                 }
-                                exibirMenu();
+                                exibirMenu(rl);
                             });
                             break;
                         case '3':
@@ -92,7 +92,7 @@ const verAtivos = function() {
                                 } else {
                                     console.log('Dados de CDI: ', results)
                                 }
-                                exibirMenu();
+                                exibirMenu(rl);
                             });
                             break;
                         default:
@@ -104,7 +104,7 @@ const verAtivos = function() {
                 break;
             default:
                 console.log('Opção inválida. Tente novamente...');
-                verAtivos(); // Chama verAtivos novamente para permitir ao usuário tentar outra opção.
+                verAtivos(rl); // Chama verAtivos novamente para permitir ao usuário tentar outra opção.
                 break;
         } 
     });

@@ -3,26 +3,26 @@
 const db = require('./database');
 
 const cadastrarAtivo = function(rl) {
-    rl.question('1. Renda Variável\n2. Renda Fixa\nQual a categoria de ativo que você deseja cadastrar?', function(opcao) {
+    rl.question('1. Renda Variável\n2. Renda Fixa\nQual a categoria de ativo que você deseja cadastrar? ', function(opcao) {
         switch (opcao) {
             case '1':
                 rl.question('1. Ação Brasileira\n2. Fundo Imobiliário\n3. Ação Americana (BDR)\n4. Criptoativos\n Qual dos segmentos você deseja cadastrar? ', function(opcao) {
                     switch (opcao) {
                         case '1':
-                            cadastrarAcaoBrasileira();
+                            cadastrarAcaoBrasileira(rl);
                             break;
                         case '2':
-                            cadastrarFundoImobiliario();
+                            cadastrarFundoImobiliario(rl);
                             break;                        
                         case '3':
-                            cadastrarAcaoAmericana();
+                            cadastrarAcaoAmericana(rl);
                             break;
                         case '4':
-                            cadastrarCriptoativo();
+                            cadastrarCriptoativo(rl);
                             break;
                         default:
                             console.log('Opção inválida. Tente novamente...');
-                            cadastrarAtivo();
+                            cadastrarAtivo(rl);
                             break;
                     }
                 });
@@ -31,30 +31,30 @@ const cadastrarAtivo = function(rl) {
                 rl.question('1. Selic\n2. IPCA\n3. CDI\nQual o indexador do seu investimento em renda fixa? ', function(opcao) {
                     switch (opcao) {
                         case '1':
-                            cadastrarRFSelic();
+                            cadastrarRFSelic(rl);
                             break;
                         case '2':
-                            cadastrarRFIPCA();
+                            cadastrarRFIPCA(rl);
                             break;
                         case '3':
-                            cadastrarRFCDI();
+                            cadastrarRFCDI(rl);
                             break;
                         default:
                             console.log('Opção inválida. Tente novamente...');
-                            cadastrarAtivo();
+                            cadastrarAtivo(rl);
                             break;
                     }
                 });
                 break;
             default:
                 console.log('Opção inválida. Tente novamente...')
-                cadastrarAtivo();
+                cadastrarAtivo(rl);
                 break;
         }
     });
 };
 
-const cadastrarAcaoBrasileira = function() {
+const cadastrarAcaoBrasileira = function(rl) {
     rl.question('Nome da ação: ', function(nome) {
         rl.question('Código da ação: (Ex.: PETR3) ',function(ticker) {
             rl.question('Preço médio de compra ação: ', function(pm) {
@@ -62,7 +62,7 @@ const cadastrarAcaoBrasileira = function() {
                     rl.question('Quantidade de ações: ', function(quantidade) {
                         if (!nome || !ticker || !pm || !setor || !quantidade) {
                             console.log('Todos os campos precisam ser preenchidos');
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         pm = pm.replace(',', '.');
@@ -72,7 +72,7 @@ const cadastrarAcaoBrasileira = function() {
 
                         if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
                             console.log('Preço médio ou quantidade de ações inválidos.')
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         const query = `INSERT INTO acoes (nome, ticker, pm, setor, quantidade) VALUES (?, ?, ?, ?, ?)`;
@@ -84,7 +84,7 @@ const cadastrarAcaoBrasileira = function() {
                             } else {
                                 console.log(`A ação ${nome} (${ticker}) foi cadastrada com sucesso!`);
                             }
-                            exibirMenu();
+                            exibirMenu(rl);
                         });
                     });
                 });
@@ -93,7 +93,7 @@ const cadastrarAcaoBrasileira = function() {
     });
 };
 
-const cadastrarFundoImobiliario = function() {
+const cadastrarFundoImobiliario = function(rl) {
     rl.question('Nome do Fundo Imobiliário (FII): ', function(nome) {
         rl.question('Código do FII: (Ex.: MXRF11) ',function(ticker) {
             rl.question('Preço médio de compra do FII: ', function(pm) {
@@ -101,7 +101,7 @@ const cadastrarFundoImobiliario = function() {
                     rl.question('Quantidade de cotas: ', function(quantidade) {
                         if (!nome || !ticker || !pm || !setor || !quantidade) {
                             console.log('Todos os campos precisam ser preenchidos');
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         pm = pm.replace(',', '.');
@@ -111,7 +111,7 @@ const cadastrarFundoImobiliario = function() {
 
                         if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
                             console.log('Preço médio ou quantidade de ações inválidos.')
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         const query = `INSERT INTO fii (nome, ticker, pm, setor, quantidade) VALUES (?, ?, ?, ?, ?)`;
@@ -123,7 +123,7 @@ const cadastrarFundoImobiliario = function() {
                             } else {
                                 console.log(`O fundo imobiliário ${nome} (${ticker}) foi cadastrado com sucesso!`);
                             }
-                            exibirMenu();
+                            exibirMenu(rl);
                         });
                     });
                 });
@@ -132,7 +132,7 @@ const cadastrarFundoImobiliario = function() {
     });
 };
 
-const cadastrarAcaoAmericana = function() {
+const cadastrarAcaoAmericana = function(rl) {
     rl.question('Nome da ação americana (BDR): ', function(nome) {
         rl.question('Código da ação: (Ex.: AAPL34) ',function(ticker) {
             rl.question('Preço médio de compra ação: ', function(pm) {
@@ -140,7 +140,7 @@ const cadastrarAcaoAmericana = function() {
                     rl.question('Quantidade de ações: ', function(quantidade) {
                         if (!nome || !ticker || !pm || !setor || !quantidade) {
                             console.log('Todos os campos precisam ser preenchidos');
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         pm = pm.replace(',', '.');
@@ -150,7 +150,7 @@ const cadastrarAcaoAmericana = function() {
 
                         if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
                             console.log('Preço médio ou quantidade de ações inválidos.')
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         const query = `INSERT INTO bdr (nome, ticker, pm, setor, quantidade) VALUES (?, ?, ?, ?, ?)`;
@@ -162,7 +162,7 @@ const cadastrarAcaoAmericana = function() {
                             } else {
                                 console.log(`A ação americana ${nome} (${ticker}) foi cadastrada com sucesso!`);
                             }
-                            exibirMenu();
+                            exibirMenu(rl);
                         });
                     });
                 });
@@ -171,7 +171,7 @@ const cadastrarAcaoAmericana = function() {
     });
 };
 
-const cadastrarCriptoativo = function() {
+const cadastrarCriptoativo = function(rl) {
     rl.question('Nome da criptomoeda: ', function(nome) {
         rl.question('Código da criptomoeda: (Ex.: BTC) ',function(ticker) {
             rl.question('Preço médio de compra: ', function(pm) {
@@ -179,7 +179,7 @@ const cadastrarCriptoativo = function() {
                     rl.question('Quantidade de cotas: ', function(quantidade) {
                         if (!nome || !ticker || !pm || !quantidade) {
                             console.log('Os campos de nome, ticker, preço médio e quantidade devem ser preenchidos.');
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         pm = pm.replace(',', '.');
@@ -189,11 +189,13 @@ const cadastrarCriptoativo = function() {
 
                         if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
                             console.log('Preço médio ou quantidade de ações inválidos.')
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
-                        const query = `INSERT INTO cripto (nome, ticker, pm, setor, quantidade) VALUES (?, ?, ?, ?, ?)`;
+                        const query = `INSERT INTO cripto (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
                         const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
+
+                        console.log('Executando a consulta: ', query, values);
 
                         db.query(query, values, (err) => {
                             if (err) {
@@ -201,7 +203,7 @@ const cadastrarCriptoativo = function() {
                             } else {
                                 console.log(`A criptomoeda ${nome} (${ticker}) foi cadastrada com sucesso!`);
                             }
-                            exibirMenu();
+                            exibirMenu(rl);
                         });
                     });
                 });
@@ -210,7 +212,7 @@ const cadastrarCriptoativo = function() {
     });
 };
 
-const cadastrarRFSelic = function() {
+const cadastrarRFSelic = function(rl) {
     rl.question('Nome do ativo: ', function(nome) {
         rl.question('Preço médio de compra: ',function(pm) {
             rl.question('Data de vencimento (AAAA/MM/DD): ', function(vencimento) { // considerar usar uma biblioteca de validação de data
@@ -231,7 +233,7 @@ const cadastrarRFSelic = function() {
 
                         if (isNaN(precoMedio) || isNaN(quantidadeCotas) || isNaN(juros)) {
                             console.log('Preço médio, quantidade ou taxa de juros são inválidos.')
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         const query = `INSERT INTO selic (nome, pm, vencimento, quantidade, taxaJuros) VALUES (?, ?, ?, ?, ?)`;
@@ -243,7 +245,7 @@ const cadastrarRFSelic = function() {
                             } else {
                                 console.log(`O ativo de renda fixa ${nome} da Selic foi cadastrado com sucesso!`);
                             }
-                            exibirMenu();
+                            exibirMenu(rl);
                         });
                     });
                 });
@@ -252,7 +254,7 @@ const cadastrarRFSelic = function() {
     });
 };
 
-const cadastrarRFIPCA = function() {
+const cadastrarRFIPCA = function(rl) {
     rl.question('Nome do ativo: ', function(nome) {
         rl.question('Preço médio de compra: ',function(pm) {
             rl.question('Data de vencimento (AAAA/MM/DD): ', function(vencimento) { // considerar usar uma biblioteca de validação de data
@@ -260,7 +262,7 @@ const cadastrarRFIPCA = function() {
                     rl.question('Taxa de juros: ', function(taxaJuros) {
                         if (!nome || !pm || !vencimento || !quantidade || !taxaJuros) {
                             console.log('Todos os campos devem ser preenchidos.');
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         pm = pm.replace(',', '.');
@@ -273,7 +275,7 @@ const cadastrarRFIPCA = function() {
 
                         if (isNaN(precoMedio) || isNaN(quantidadeCotas) || isNaN(juros)) {
                             console.log('Preço médio, quantidade ou taxa de juros são inválidos.')
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         const query = `INSERT INTO ipca (nome, pm, vencimento, quantidade, taxaJuros) VALUES (?, ?, ?, ?, ?)`;
@@ -285,7 +287,7 @@ const cadastrarRFIPCA = function() {
                             } else {
                                 console.log(`O ativo de renda fixa ${nome} de IPCA foi cadastrado com sucesso!`);
                             }
-                            exibirMenu();
+                            exibirMenu(rl);
                         });
                     });
                 });
@@ -294,7 +296,7 @@ const cadastrarRFIPCA = function() {
     });
 };
 
-const cadastrarRFCDI = function() {
+const cadastrarRFCDI = function(rl) {
     rl.question('Nome do ativo: ', function(nome) {
         rl.question('Preço médio de compra: ',function(pm) {
             rl.question('Data de vencimento (AAAA/MM/DD): ', function(vencimento) { // considerar usar uma biblioteca de validação de data
@@ -315,7 +317,7 @@ const cadastrarRFCDI = function() {
 
                         if (isNaN(precoMedio) || isNaN(quantidadeCotas) || isNaN(juros)) {
                             console.log('Preço médio, quantidade ou taxa de juros são inválidos.')
-                            return exibirMenu();
+                            return exibirMenu(rl);
                         }
 
                         const query = `INSERT INTO cdi (nome, pm, vencimento, quantidade, taxaJuros) VALUES (?, ?, ?, ?, ?)`;
@@ -327,7 +329,7 @@ const cadastrarRFCDI = function() {
                             } else {
                                 console.log(`O ativo de renda fixa ${nome} de CDI foi cadastrado com sucesso!`);
                             }
-                            exibirMenu();
+                            exibirMenu(rl);
                         });
                     });
                 });

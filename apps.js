@@ -12,38 +12,38 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-const exibirMenu = function () {
+const exibirMenu = function (rl) {
     rl.question('1. Cadastrar um novo ativo. \n2. Editar ativos.\n3. Visualizar Ativos.\n4. Excluir Ativo. \n5. Fazer Backup\n6. Sair.\n\n Qual opção você deseja utilizar? ', function (opcao) {
         switch (opcao) {
             case '1':
-                cadastrarAtivo();
+                cadastrarAtivo(rl);
                 break;
             case '2':
-                editarAtivo();
+                editarAtivo(rl);
                 break;
             case '3':
-                verAtivos();
+                verAtivos(rl);
                 break;
             case '4':
-                excluirAtivo();
+                excluirAtivo(rl);
                 break;
             case '5':
-                fazerBackup();
+                fazerBackup(rl);
                 break;
             case '6':
-                sair();
+                sair(rl);
                 break;
             default:
                 console.log('Opção inválida. Tente novamente...')
-                exibirMenu();
+                exibirMenu(rl);
                 break;
         }
     });
 };
 
-const sair = function() {
+const sair = function(rl) {
     console.log('Até logo Investidor!\nSaindo...')
     rl.close();
 };
 
-exibirMenu();
+exibirMenu(rl);
