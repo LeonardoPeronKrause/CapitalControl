@@ -1,11 +1,11 @@
 'use strict';
 
 const readline = require('readline');
-const { cadastrarAtivo } = require('./cadastro.js');
-const { editarAtivo } = require('./edicao.js');
-const { verAtivos } = require('./visualizacao.js');
-const { excluirAtivo } = require('./exclusao.js');
-const { fazerBackup } = require('./backup.js');
+const cadastro = require('./cadastro.js');
+const edicao = require('./edicao.js');
+const visualizacao = require('./visualizacao.js');
+const exclusao = require('./exclusao.js');
+const backup = require('./backup.js');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -13,7 +13,7 @@ const rl = readline.createInterface({
 });
 
 const exibirMenu = function (rl) {
-    rl.question('1. Cadastrar um novo ativo. \n2. Editar ativos.\n3. Visualizar Ativos.\n4. Excluir Ativo. \n5. Fazer Backup\n6. Sair.\n\n Qual opção você deseja utilizar? ', function (opcao) {
+    rl.question('1. Cadastrar um novo ativo.\n2. Editar ativos.\n3. Visualizar Ativos.\n4. Excluir Ativo. \n5. Fazer Backup\n6. Sair.\n\n Qual opção você deseja utilizar? ', function (opcao) {
         switch (opcao) {
             case '1':
                 cadastrarAtivo(rl);
@@ -47,3 +47,7 @@ const sair = function(rl) {
 };
 
 exibirMenu(rl);
+
+module.exports = {
+    exibirMenu
+};
