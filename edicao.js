@@ -92,7 +92,7 @@ const editarAtivo = function() {
                                     console.log('Número inválido. Tente novamente.');
                                     exibirMenu();
                                 }
-                            })
+                            });
                         });
                         break;
                         case '2':
@@ -177,10 +177,9 @@ const editarAtivo = function() {
                                         console.log('Número inválido. Tente novamente.');
                                         exibirMenu();
                                     }
-                                })
+                                });
                             });
-                            break;
-
+                        break;
                         case '3':
                             const queryBdr = 'SELECT * FROM bdr';
                             db.query(queryBdr, (err, results) => {
@@ -215,19 +214,62 @@ const editarAtivo = function() {
                                                             const updates = []; ; // Armazena as colunas que serão utilizada
                                                             const params = []; ; // Armazena os valores das colunas
 
+                                                            if (novoNome.trim() !== '') {
+                                                                updates.push('nome = ?');
+                                                                params.push(novoNome);
+                                                            }
 
-                                                        }
+                                                            if (novoTicker.trim() !== '') {
+                                                                updates.push('ticker = ?');
+                                                                params.push(novoTicker);
+                                                            }
+
+                                                            if (novoPm.trim() !== '') {
+                                                                updates.push('pm = ?');
+                                                                params.push(novoPm);
+                                                            }
+
+                                                            if (novoSetor.trim() !== '') {
+                                                                updates.push('setor = ?');
+                                                                params.push(novoSetor);
+                                                            }
+
+                                                            if (novaQuantidade.trim() !== '') {
+                                                                updates.push('quantidade = ?');
+                                                                params.push(novaQuantidade);
+                                                            }
+
+                                                            if (updates.length > 0) {
+                                                                params.push(bdrSelecionada.id);
+                                                                const updateQuery = `UPDATE bdr SET ${updates.join(', ')} WHERE id = ?`;
+                                                                db.query(updateQuery, params, (err) => {
+                                                                    if (err) {
+                                                                        console.log('Erro ao atualizar ação americana: ', err.message);
+                                                                    } else {
+                                                                        console.log('A ação americana foi atualizada com sucesso!');
+                                                                    }
+                                                                    exibirMenu();
+                                                                });
+                                                            } else {
+                                                                console.log('Nenhuma atualização realizada.');
+                                                                exibirMenu();
+                                                            }
+                                                        });
                                                     });
                                                 });
                                             });
                                         });
+                                    } else {
+                                        console.log('Númerp inválido. Tente novamente.');
+                                        exibirMenu();
                                     }
                                 });
                             });
+                        break;
                     }
-                })
+                });
         }
-     })
+     });
 };
 
 module.exports = {
