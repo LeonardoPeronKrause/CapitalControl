@@ -8,7 +8,7 @@ const { excluirAtivo } = require('./exclusao.js');
 const { fazerBackup } = require('./backup.js');
 
 const exibirMenu = function () {
-    rl.question('1. Cadastrar um novo ativo. \n2. Editar ativos.\n3. Visualizar Ativos.\n4. Excluir Ativo. \n5. Fazer Backup\n6. Sair.\n\n Qual opção você deseja utilizar? ', function (opcao) {
+    rl.question('1. Cadastrar um novo ativo. \n2. Editar ativos.\n3. Visualizar Ativos.\n4. Excluir Ativo. \n5. Fazer Backup\n6. Sair.\n Qual opção você deseja utilizar? ', function (opcao) {
         switch (opcao) {
             case '1':
                 cadastrarAtivo();

@@ -55,7 +55,7 @@ const cadastrarAtivo = function() {
     });
 };
 
-const cadastrarAcaoBrasileira = function(rl) {
+const cadastrarAcaoBrasileira = function() {
     rl.question('Nome da ação: ', function(nome) {
         rl.question('Código da ação: (Ex.: PETR3) ',function(ticker) {
             rl.question('Preço médio de compra ação: ', function(pm) {
@@ -76,7 +76,7 @@ const cadastrarAcaoBrasileira = function(rl) {
                             return exibirMenu();
                         }
 
-                        const query = `INSERT INTO acoes (nome, ticker, pm, setor, quantidade) VALUES (?, ?, ?, ?, ?)`;
+                        const query = `INSERT INTO acoes (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
                         const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
 
                         db.query(query, values, (err) => {
@@ -85,7 +85,7 @@ const cadastrarAcaoBrasileira = function(rl) {
                             } else {
                                 console.log(`A ação ${nome} (${ticker}) foi cadastrada com sucesso!`);
                             }
-                    exibirMenu();
+                            exibirMenu();
                         });
                     });
                 });
@@ -115,7 +115,7 @@ const cadastrarFundoImobiliario = function() {
                             return exibirMenu();
                         }
 
-                        const query = `INSERT INTO fii (nome, ticker, pm, setor, quantidade) VALUES (?, ?, ?, ?, ?)`;
+                        const query = `INSERT INTO fii (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
                         const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
 
                         db.query(query, values, (err) => {
@@ -154,7 +154,7 @@ const cadastrarAcaoAmericana = function() {
                             return exibirMenu();
                         }
 
-                        const query = `INSERT INTO bdr (nome, ticker, pm, setor, quantidade) VALUES (?, ?, ?, ?, ?)`;
+                        const query = `INSERT INTO bdr (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
                         const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
 
                         db.query(query, values, (err) => {
@@ -237,7 +237,7 @@ const cadastrarRFSelic = function() {
                             return exibirMenu();
                         }
 
-                        const query = `INSERT INTO selic (nome, pm, vencimento, quantidade, taxaJuros) VALUES (?, ?, ?, ?, ?)`;
+                        const query = `INSERT INTO selic (nome, pm, vencimento, quantidade, taxaJuros) VALUES ($1, $2, $3, $4, $5)`;
                         const values = [nome, precoMedio, vencimento, quantidadeCotas, juros]; 
 
                         db.query(query, values, (err) => {
@@ -279,7 +279,7 @@ const cadastrarRFIPCA = function() {
                             return exibirMenu();
                         }
 
-                        const query = `INSERT INTO ipca (nome, pm, vencimento, quantidade, taxaJuros) VALUES (?, ?, ?, ?, ?)`;
+                        const query = `INSERT INTO ipca (nome, pm, vencimento, quantidade, taxaJuros) VALUES ($1, $2, $3, $4, $5)`;
                         const values = [nome, precoMedio, vencimento, quantidadeCotas, juros]; 
 
                         db.query(query, values, (err) => {
@@ -321,7 +321,7 @@ const cadastrarRFCDI = function() {
                             return exibirMenu();
                         }
 
-                        const query = `INSERT INTO cdi (nome, pm, vencimento, quantidade, taxaJuros) VALUES (?, ?, ?, ?, ?)`;
+                        const query = `INSERT INTO cdi (nome, pm, vencimento, quantidade, taxaJuros) VALUES ($1, $2, $3, $4, $5)`;
                         const values = [nome, precoMedio, vencimento, quantidadeCotas, juros]; 
 
                         db.query(query, values, (err) => {
