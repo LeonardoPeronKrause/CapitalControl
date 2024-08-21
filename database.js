@@ -4,14 +4,12 @@ const pool = new Pool ({
     user: 'postgres',
     host: 'localhost',
     database: 'leonardo',
-    password: '123',
+    password: '1234',
     port: 5432
 });
 
 // Função para realizar consulta ao banco de dados
-const query = (text, params) => {
-    return pool.query(text, params)
-};
+const query = (text, params) => pool.query(text, params);
 
 module.exports = {
     query
