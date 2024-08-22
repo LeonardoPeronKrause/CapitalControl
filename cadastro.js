@@ -2,6 +2,8 @@
 
 const db = require('./database.js');
 const rl = require('./readline.js');
+const cadastro = require('./utils.js');
+const menu = require('./apps.js');
 
 const cadastrarAtivo = function() {
     rl.question('1. Renda Variável\n2. Renda Fixa\nQual a categoria de ativo que você deseja cadastrar? ', function(opcao) {
@@ -66,7 +68,7 @@ const cadastrarAcaoBrasileira = function() {
     ];
 
     // Usa a função perguntarDados para coletar as respostas do usuário
-    perguntarDados(perguntas, function(respostas) {
+    cadastro.perguntarDados(perguntas, function(respostas) {
         // Desestrutura as respostas em variáveis individuais
         const [nome, ticker, pm, setor, quantidade] = respostas;
 
@@ -91,128 +93,107 @@ const cadastrarAcaoBrasileira = function() {
         const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
 
         // Usa a função executarQuery para executar a consulta no banco de dados
-        executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, exibirMenu);
+        executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, menu.exibirMenu);
     });
 };
 
-/*const cadastrarAcaoBrasileira = function() {
-    rl.question('Nome da ação: ', function(nome) {
-        rl.question('Código da ação: (Ex.: PETR3) ',function(ticker) {
-            rl.question('Preço médio de compra ação: ', function(pm) {
-                rl.question('Setor: ', function(setor) {
-                    rl.question('Quantidade de ações: ', function(quantidade) {
-                        if (!nome || !ticker || !pm || !setor || !quantidade) {
-                            console.log('Todos os campos precisam ser preenchidos');
-                            return exibirMenu();
-                        }
-
-                        pm = pm.replace(',', '.');
-
-                        const precoMedio = parseFloat(pm);
-                        const quantidadeCotas = parseInt(quantidade);
-
-                        if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
-                            console.log('Preço médio ou quantidade de ações inválidos.')
-                            return exibirMenu();
-                        }
-
-                        const query = `INSERT INTO acoes (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
-                        const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
-
-                        db.query(query, values, (err) => {
-                            if (err) {
-                                console.log('Erro ao cadastrar dados da ação: ', err.message);
-                            } else {
-                                console.log(`A ação ${nome} (${ticker}) foi cadastrada com sucesso!`);
-                            }
-                            exibirMenu();
-                        });
-                    });
-                });
-            });
-        });
-    });
-};*/
-
 const cadastrarFundoImobiliario = function() {
-    rl.question('Nome do Fundo Imobiliário (FII): ', function(nome) {
-        rl.question('Código do FII: (Ex.: MXRF11) ',function(ticker) {
-            rl.question('Preço médio de compra do FII: ', function(pm) {
-                rl.question('Setor: ', function(setor) {
-                    rl.question('Quantidade de cotas: ', function(quantidade) {
-                        if (!nome || !ticker || !pm || !setor || !quantidade) {
-                            console.log('Todos os campos precisam ser preenchidos');
-                            return exibirMenu();
-                        }
+    const perguntas = [
+        'Nome do fundo imobiliário: ',
+        'Ticker: (EX: MXRF11) ',
+        'Preço médio de compra: ',
+        'Setor: ',
+        'Quantidade de cotas: '
+    ];
 
-                        pm = pm.replace(',', '.');
+    cadastro.perguntarDados(perguntas, function(respostas) {
+        const [nome, ticker, pm, setor, quantidade] = respostas;
+    
+        if (!nome || !ticker || !pm || !setor || !quantidade) {
+            console.log('Todos os campos precisam ser preenchidos');
+            return exibirMenu();
+        }
 
-                        const precoMedio = parseFloat(pm);
-                        const quantidadeCotas = parseInt(quantidade);
+        const precoMedio = parseFloat(pm.replace(',', '.'));
+        const quantidadeCotas = parseInt(quantidade);
 
-                        if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
-                            console.log('Preço médio ou quantidade de ações inválidos.')
-                            return exibirMenu();
-                        }
+        if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
+            console.log('Preço médio ou quantidade de ações inválidos.')
+            return exibirMenu();
+        }
 
-                        const query = `INSERT INTO fii (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
-                        const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
-
-                        db.query(query, values, (err) => {
-                            if (err) {
-                                console.log('Erro ao cadastrar dados do fundo imobiliário: ', err.message);
-                            } else {
-                                console.log(`O fundo imobiliário ${nome} (${ticker}) foi cadastrado com sucesso!`);
-                            }
-                            exibirMenu();
-                        });
-                    });
-                });
-            });
-        });
+        const query = `INSERT INTO fii (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
+        const values = [nome, ticker, precoMedio, setor, quantidadeCotas];   
+        
+        cadastro.executarQuery(query, values, `O fundo imobiliário ${nome} (${ticker}) foi cadastrado com sucesso!`, menu.exibirMenu);
     });
 };
 
 const cadastrarAcaoAmericana = function() {
-    rl.question('Nome da ação americana (BDR): ', function(nome) {
-        rl.question('Código da ação: (Ex.: AAPL34) ',function(ticker) {
-            rl.question('Preço médio de compra ação: ', function(pm) {
-                rl.question('Setor: ', function(setor) {
-                    rl.question('Quantidade de ações: ', function(quantidade) {
-                        if (!nome || !ticker || !pm || !setor || !quantidade) {
-                            console.log('Todos os campos precisam ser preenchidos');
-                            return exibirMenu();
-                        }
+    const respostas = [
+        'Nome da ação: ',
+        'Ticker: (APPL34) ',
+        'Preço médio de compra: ',
+        'Setor: ',
+        'Quantidade de cotas: '
+    ];
 
-                        pm = pm.replace(',', '.');
+    cadastro.perguntarDados(perguntas, function(respostas) {
+        const [nome, ticker, pm, setor, quantidade] = respostas;
 
-                        const precoMedio = parseFloat(pm);
-                        const quantidadeCotas = parseInt(quantidade);
+        if (!nome || !ticker || !pm || !setor || !quantidade) {
+            console.log('Todos os campos precisam ser preenchidos');
+            return exibirMenu();
+        }
 
-                        if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
-                            console.log('Preço médio ou quantidade de ações inválidos.')
-                            return exibirMenu();
-                        }
+        const precoMedio = parseFloat(pm.replace(',', '.'));
+        const quantidadeCotas = parseInt(quantidade);
 
-                        const query = `INSERT INTO bdr (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
-                        const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
+        if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
+            console.log('Preço médio ou quantidade de ações inválidos.')
+            return exibirMenu();
+        }
 
-                        db.query(query, values, (err) => {
-                            if (err) {
-                                console.log('Erro ao cadastrar dados da ação: ', err.message);
-                            } else {
-                                console.log(`A ação americana ${nome} (${ticker}) foi cadastrada com sucesso!`);
-                            }
-                            exibirMenu();
-                        });
-                    });
-                });
-            });
-        });
+        const query = `INSERT INTO fii (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
+        const values = [nome, ticker, precoMedio, setor, quantidadeCotas];   
+        
+        cadastro.executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, menu.exibirMenu);
     });
 };
 
 const cadastrarCriptoativo = function() {
+    const respostas = [
+        'Nome do criptoativo: ',
+        'Ticker: (EX: BTC)',
+        'Preço médio de compra: ',
+        'Setor: (opcional) ',
+        'Quantidade: '
+    ];
+
+    cadastro.perguntarDados(perguntas, function(respostas) {
+        const [nome, ticker, pm, setor, quantidade] = respostas;
+
+        if (!nome || !ticker || !pm || !quantidade) {
+            console.log('Os campos de nome, ticker, preço médio e quantidade devem ser preenchidos.');
+            return exibirMenu();
+        }
+        
+        const precoMedio = parseFloat(pm.replace(',', '.'));
+        const quantidadeCotas = parseFloat(quantidade);
+
+        if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
+            console.log('Preço médio ou quantidade de ações inválidos.')
+            return exibirMenu();
+        }
+
+        const query = `INSERT INTO cripto (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
+        const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
+
+        cadastro.executarQuery(query, values, `O criptoativo ${nome} (${ticker}) foi cadastrado com sucesso!`, menu.exibirMenu);
+    });
+};
+
+/* const cadastrarCriptoativo = function() {
     rl.question('Nome da criptomoeda: ', function(nome) {
         rl.question('Código da criptomoeda: (Ex.: BTC) ',function(ticker) {
             rl.question('Preço médio de compra: ', function(pm) {
@@ -251,7 +232,7 @@ const cadastrarCriptoativo = function() {
             });
         });
     });
-};
+};*/
 
 const cadastrarRFSelic = function() {
     rl.question('Nome do ativo: ', function(nome) {
