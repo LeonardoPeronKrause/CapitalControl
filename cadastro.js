@@ -56,6 +56,46 @@ const cadastrarAtivo = function() {
 };
 
 const cadastrarAcaoBrasileira = function() {
+    // Define as perguntas a serem feitas para o usuário
+    const perguntas = [
+        'Nome da ação: ',
+        'Código da ação: (EX: PETR3) ',
+        'Preço médio de compra: ',
+        'Setor: ',
+        'Quantidade de ações: '
+    ];
+
+    // Usa a função perguntarDados para coletar as respostas do usuário
+    perguntarDados(perguntas, function(respostas) {
+        // Desestrutura as respostas em variáveis individuais
+        const [nome, ticker, pm, setor, quantidade] = respostas;
+
+        // Verifica se todos os campos foram preenchidos
+        if (!nome || !ticker || !pm || !setor || !quantidade) {
+            console.log('Todos os campos precisam ser preenchidos');
+            return exibirMenu(); // Retorna ao menu se algum campo estiver vazio
+        }
+
+         // Substitui a vírgula por ponto no preço médio para tratar como número
+        const precoMedio = parseFloat(pm.replace(',', '.'));
+        const quantidadeCotas = parseInt(quantidade);
+
+        // Verifica se a conversão para número foi bem-sucedida
+        if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
+            console.log('Preço médio ou quantidade de ações inválidos.')
+            return exibirMenu(); // Retorna ao menu se os valores forem inválidos
+        }
+
+        // Define a consulta SQL para inserir os dados do banco de dados
+        const query = `INSERT INTO acoes (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
+        const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
+
+        // Usa a função executarQuery para executar a consulta no banco de dados
+        executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, exibirMenu);
+    });
+};
+
+/*const cadastrarAcaoBrasileira = function() {
     rl.question('Nome da ação: ', function(nome) {
         rl.question('Código da ação: (Ex.: PETR3) ',function(ticker) {
             rl.question('Preço médio de compra ação: ', function(pm) {
@@ -92,7 +132,7 @@ const cadastrarAcaoBrasileira = function() {
             });
         });
     });
-};
+};*/
 
 const cadastrarFundoImobiliario = function() {
     rl.question('Nome do Fundo Imobiliário (FII): ', function(nome) {

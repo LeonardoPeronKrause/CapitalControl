@@ -43,4 +43,7 @@ const sair = function() {
 
 exibirMenu();
 
-module.exports = rl;
+module.exports = {
+    rl,
+    exibirMenu
+};
