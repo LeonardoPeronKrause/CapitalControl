@@ -259,5 +259,5 @@ function editarAtivoFixoSelecionado(tabela, tipoAtivo, results) {
 
 // Exporta a função de exibição do menu para ser usada em outros módulos
 module.exports = {
-    exibirMenu,
+    exibirMenu
 };
