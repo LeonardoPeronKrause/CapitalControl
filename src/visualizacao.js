@@ -3,7 +3,7 @@
 // Importa os módulos necessários
 const db = require('./database.js');    // Módulo p interagir c o db
 const rl = require('./readline.js');    // Módulo p manipulação da entrada de dados via terminal
-const exibirMenu = require('./menu.js')
+const { exibirMenu } = require('./menu.js')
 
 // Função para visualizar os ativos de investimeno
 const verAtivos = function() {

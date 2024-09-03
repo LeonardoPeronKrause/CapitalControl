@@ -3,7 +3,7 @@
 const db = require('./database.js');
 const rl = require('./readline.js');
 const perguntarDados = require('./utils.js');
-const exibirMenu = require('./menu.js');
+const menu = require('./menu.js');
 
 
 const cadastrarAtivo = function() {
@@ -99,7 +99,7 @@ const cadastrarAcaoBrasileira = function() {
         const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
 
         // Usa a função executarQuery para executar a consulta no banco de dados
-        db.executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, exibirMenu());
+        db.executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, exibirMenu);
     });
 };
 
@@ -136,7 +136,7 @@ const cadastrarFundoImobiliario = function() {
         const query = `INSERT INTO fii (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
         const values = [nome, ticker, precoMedio, setor, quantidadeCotas];   
         
-        db.executarQuery(query, values, `O fundo imobiliário ${nome} (${ticker}) foi cadastrado com sucesso!`, menu.exibirMenu);
+        db.executarQuery(query, values, `O fundo imobiliário ${nome} (${ticker}) foi cadastrado com sucesso!`, exibirMenu);
     });
 };
 
@@ -210,7 +210,7 @@ const cadastrarCriptoativo = function() {
         const query = `INSERT INTO cripto (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
         const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
 
-        db.executarQuery(query, values, `O criptoativo ${nome} (${ticker}) foi cadastrado com sucesso!`, menu.exibirMenu);
+        db.executarQuery(query, values, `O criptoativo ${nome} (${ticker}) foi cadastrado com sucesso!`, exibirMenu);
     });
 };
 
@@ -246,7 +246,7 @@ const cadastrarRFSelic = function() {
         const query = `INSERT INTO selic (nome, pm, vencimento, quantidade, taxaJuros) VALUES ($1, $2, $3, $4, $5)`;
         const values = [nome, precoMedio, vencimento, quantidadeCotas, juros]; 
 
-        db.executarQuery(query, values, `A aplicação em Selic ${nome} foi cadastrada com sucesso!`, menu.exibirMenu);
+        db.executarQuery(query, values, `A aplicação em Selic ${nome} foi cadastrada com sucesso!`, exibirMenu);
     });
 };
 
@@ -282,7 +282,7 @@ const cadastrarRFIPCA = function() {
         const query = `INSERT INTO ipca (nome, pm, vencimento, quantidade, taxaJuros) VALUES ($1, $2, $3, $4, $5)`;
         const values = [nome, precoMedio, vencimento, quantidade, juros];
 
-        db.executarQuery(query, values, `A aplicação em IPCA ${nome}`, menu.exibirMenu);
+        db.executarQuery(query, values, `A aplicação em IPCA ${nome}`, exibirMenu);
     });
 };
 
@@ -318,7 +318,7 @@ const cadastrarRFCDI = function() {
         const query = `INSERT INTO cdi (nome, precoMedio, vencimento, quantidadeCotas, juros) VALUES ($1, $2, $3, $4, $5)`;
         const values = [nome, precoMedio, vencimento, quantidadeCotas, juros];
 
-        db.executarQuery(query, values, `A aplicação em CDI ${nome} foi cadastrada com sucesso!`, menu.exibirMenu);
+        db.executarQuery(query, values, `A aplicação em CDI ${nome} foi cadastrada com sucesso!`, exibirMenu);
     }) ;
 };
 
