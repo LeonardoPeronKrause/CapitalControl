@@ -7,26 +7,27 @@ const { verAtivos } = require('./src/visualizacao.js');
 const { exibirMenuExclusao } = require('./src/exclusao.js');
 const { fazerBackup } = require('./src/backup.js');
 const exibirMenu = require('./src/menu.js');
- 
+const sair = require('./src/sair.js');
+
 function main() {
     exibirMenu();
 
     rl.question('Qual opção você deseja utilizar? ', (opcao) => {
         switch (opcao) {
             case '1':
-                cadastrarAtivo();
+                cadastrarAtivo(() => main());
                 break;
             case '2':
-                exibirMenuEdicao();
+                exibirMenuEdicao(() => main());
                 break;
             case '3':
-                verAtivos();
+                verAtivos(() => main());
                 break;
             case '4':
-                exibirMenuExclusao();
+                exibirMenuExclusao(() => main());
                 break;
             case '5':
-                fazerBackup();
+                fazerBackup(() => main());
                 break;
             case '6':
                 sair();
