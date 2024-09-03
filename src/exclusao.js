@@ -2,8 +2,9 @@
 
 const rl = require('./readline');
 const db = require('./database');
+const sair = require('./sair');
 
-function exibirMenu() {
+function exibirMenuExclusao() {
     console.log('=== Menu de Exclusão ===');
     console.log('1. Excluir Ação Brasileira');
     console.log('2. Excluir Fundo Imobiliário (FII)');
@@ -38,8 +39,7 @@ function exibirMenu() {
                 exclusaoRendaFixa('cdi', 'CDI');
                 break;
             case '8':
-                console.log('Até logo, Investidor!');
-                rl.close();
+                sair;
                 break;
             default:
                 console.log('Opção inválida. Tente novamente.');
@@ -172,5 +172,5 @@ function excluirAtivoFixoSelecionado(tabela, tipoAtivo, results) {
 module.exports = {
     excluirAtivoFixoSelecionado,
     excluirAtivoVariavelSelecionado, 
-    exibirMenu
+    exibirMenuExclusao
 }

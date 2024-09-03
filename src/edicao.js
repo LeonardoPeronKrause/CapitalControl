@@ -3,9 +3,10 @@
 // Importa os módulos necessários
 const rl = require('./readline'); // Módulo para leitura de entradas do usuário
 const db = require('./database'); // Módulo para interação com o banco de dados
+const sair = require('./sair');
 
 // Função que exibe o menu principal de edição
-function exibirMenu() {
+function exibirMenuEdicao() {
     console.log('\n=== Menu de Edição ===');
     console.log('1. Editar Ações Brasileiras');
     console.log('2. Editar Fundos Imobiliários (FIIs)');
@@ -41,8 +42,7 @@ function exibirMenu() {
                 edicaoRendaFixa('cdi', 'CDI'); // Edita ativos de CDI
                 break;
             case '8':
-                console.log('Até logo, Investidor!'); // Mensagem de despedida
-                rl.close(); // Fecha a leitura
+                sair; // Fecha a leitura
                 break;
             default:
                 console.log('Opção inválida. Tente novamente.'); // Mensagem de erro
@@ -259,5 +259,5 @@ function editarAtivoFixoSelecionado(tabela, tipoAtivo, results) {
 
 // Exporta a função de exibição do menu para ser usada em outros módulos
 module.exports = {
-    exibirMenu
+    exibirMenuEdicao
 }

@@ -2,8 +2,9 @@
 
 const db = require('./database.js');
 const rl = require('./readline.js');
-const cadastro = require('./utils.js');
-const menu = require('./apps.js');
+const perguntarDados = require('./utils.js');
+const exibirMenu = require('./menu.js');
+
 
 const cadastrarAtivo = function() {
     rl.question('1. Renda Variável\n2. Renda Fixa\nQual a categoria de ativo que você deseja cadastrar? ', function(opcao) {
@@ -68,14 +69,14 @@ const cadastrarAcaoBrasileira = function() {
     ];
 
     // Usa a função perguntarDados para coletar as respostas do usuário
-    cadastro.perguntarDados(perguntas, function(respostas) {
+    perguntarDados(perguntas, function(respostas) {
         // Desestrutura as respostas em variáveis individuais
         let [nome, ticker, pm, setor, quantidade] = respostas;
 
         // Verifica se todos os campos foram preenchidos
         if (!nome || !ticker || !pm || !setor || !quantidade) {
             console.log('Todos os campos precisam ser preenchidos');
-            return menu.exibirMenu(); // Retorna ao menu se algum campo estiver vazio
+            return exibirMenu(); // Retorna ao menu se algum campo estiver vazio
         }
 
         // Convertendo os valores para maiusculo para não dar problemas no db
@@ -90,7 +91,7 @@ const cadastrarAcaoBrasileira = function() {
         // Verifica se a conversão para número foi bem-sucedida
         if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
             console.log('Preço médio ou quantidade de ações inválidos.')
-            return menu.exibirMenu(); // Retorna ao menu se os valores forem inválidos
+            return exibirMenu(); // Retorna ao menu se os valores forem inválidos
         }
 
         // Define a consulta SQL para inserir os dados do banco de dados
@@ -98,7 +99,7 @@ const cadastrarAcaoBrasileira = function() {
         const values = [nome, ticker, precoMedio, setor, quantidadeCotas]; 
 
         // Usa a função executarQuery para executar a consulta no banco de dados
-        db.executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, menu.exibirMenu);
+        db.executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, exibirMenu());
     });
 };
 
@@ -111,7 +112,7 @@ const cadastrarFundoImobiliario = function() {
         'Quantidade de cotas: '
     ];
 
-    cadastro.perguntarDados(perguntas, function(respostas) {
+    perguntarDados(perguntas, function(respostas) {
         let [nome, ticker, pm, setor, quantidade] = respostas;
     
         if (!nome || !ticker || !pm || !setor || !quantidade) {
@@ -148,7 +149,7 @@ const cadastrarAcaoAmericana = function() {
         'Quantidade de cotas: '
     ];
 
-    cadastro.perguntarDados(perguntas, function(respostas) {
+    perguntarDados(perguntas, function(respostas) {
         let [nome, ticker, pm, setor, quantidade] = respostas;
 
         if (!nome || !ticker || !pm || !setor || !quantidade) {
@@ -185,7 +186,7 @@ const cadastrarCriptoativo = function() {
         'Quantidade: '
     ];
 
-    cadastro.perguntarDados(perguntas, function(respostas) {
+    perguntarDados(perguntas, function(respostas) {
         let [nome, ticker, pm, setor, quantidade] = respostas;
 
         if (!nome || !ticker || !pm || !quantidade) {
@@ -222,7 +223,7 @@ const cadastrarRFSelic = function() {
         'Taxa de juros: '
     ]
 
-    cadastro.perguntarDados(perguntas, function(respostas) {
+    perguntarDados(perguntas, function(respostas) {
         let [nome, pm, vencimento, quantidade, taxaJuros] = respostas;
 
         if (!nome || !pm || !vencimento || !taxaJuros) {
@@ -258,7 +259,7 @@ const cadastrarRFIPCA = function() {
         'Taxa de juros: '
     ];
 
-    cadastro.perguntarDados(perguntas, function(respostas) {
+    perguntarDados(perguntas, function(respostas) {
         let [nome, pm, vencimento, quantidade, taxaJuros] = respostas;
 
         if (!nome || !pm || !vencimento || !taxaJuros) {
@@ -294,7 +295,7 @@ const cadastrarRFCDI = function() {
         'Taxa de juros: '
     ]
 
-    cadastro.perguntarDados(perguntas, function(respostas) {
+    perguntarDados(perguntas, function(respostas) {
         let [nome, pm, vencimento, quantidade, taxaJuros] = respostas;
 
         if (!nome || !pm || !vencimento || !taxaJuros) {
