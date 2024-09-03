@@ -1,35 +1,32 @@
 'use strict';
 
-const rl = require('./readline.js');
-const cadastro = require('./cadastro.js');
-const edicao = require('./edicao.js');
-const visualizacao = require('./visualizacao.js');
-const exclusao = require('./exclusao.js');
-const backup = require('./backup.js');
-
-function exibirMenu() {
-    console.log('1. Cadastrar um novo ativo. \n2. Editar ativos.\n3. Visualizar Ativos.\n4. Excluir Ativo. \n5. Fazer Backup\n6. Sair.');
-}
-
+const rl = require('./src/readline.js');
+const { cadastrarAtivo } = require('./src/cadastro.js');
+const { exibirMenuEdicao } = require('./src/edicao.js');
+const { verAtivos } = require('./src/visualizacao.js');
+const { exibirMenuExclusao } = require('./src/exclusao.js');
+const { fazerBackup } = require('./src/backup.js');
+const exibirMenu = require('./src/menu.js');
+ 
 function main() {
     exibirMenu();
 
     rl.question('Qual opção você deseja utilizar? ', (opcao) => {
         switch (opcao) {
             case '1':
-                cadastro.cadastrarAtivo();
+                cadastrarAtivo();
                 break;
             case '2':
-                edicao.editarAtivo();
+                exibirMenuEdicao();
                 break;
             case '3':
-                visualizacao.verAtivos();
+                verAtivos();
                 break;
             case '4':
-                exclusao.excluirAtivo();
+                exibirMenuExclusao();
                 break;
             case '5':
-                backup.fazerBackup();
+                fazerBackup();
                 break;
             case '6':
                 sair();
@@ -42,13 +39,4 @@ function main() {
     })
 };
 
-const sair = function() {
-    console.log('Até logo Investidor!\nSaindo...')
-    rl.close();
-};
-
 main();
-
-module.exports = {
-    sair
-}
