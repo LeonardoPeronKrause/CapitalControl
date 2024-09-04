@@ -9,3 +9,9 @@
                 4. Considere Async/Await: Se ainda não o fez, considere usar async/await para operações de banco de dados, para tornar seu código mais limpo e fácil de seguir em comparação ao uso de callbacks.
 
 */
+
+*/
+
+Já tenho um README pronto e gostaria de aprimorar o projeto adicionando uma funcionalidade que permita definir um valor alvo para uma ação. Quando o preço da ação atingir esse valor, o sistema enviará uma notificação. Isso usando API
+
+*/
