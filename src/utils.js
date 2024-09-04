@@ -38,4 +38,4 @@ const perguntarDados = function(perguntas, callback) {
     perguntar(0);
 };
 
-module.exports = perguntarDados;
+module.exports = { perguntarDados };

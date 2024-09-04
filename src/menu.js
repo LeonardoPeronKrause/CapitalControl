@@ -2,20 +2,20 @@
 
 const rl = require('./readline.js');
 const { cadastrarAtivo } = require('./cadastro.js');
-const { visualizarAtivos } = require('./visualizacao.js');
+const { verAtivos } = require('./visualizacao.js');
 const { editarAtivo } = require('./edicao.js');
 const { excluirAtivo } = require('./exclusao.js');
 const { fazerBackup } = require('./backup.js');
 const { exibirMenu } = require('./menuUtils.js');
 
-const iniciarMenu = function() {
+function iniciarMenu() {
     exibirMenu(function(opcao) {
         switch (opcao) {
             case '1':
                 cadastrarAtivo(iniciarMenu);
                 break;
             case '2':
-                visualizarAtivos(iniciarMenu);
+                verAtivos(iniciarMenu);
                 break;
             case '3':
                 editarAtivo(iniciarMenu);
@@ -36,6 +36,6 @@ const iniciarMenu = function() {
                 break;
         }
     });
-};
+}
 
-module.exports = iniciarMenu;
+module.exports = { iniciarMenu }; // Exporta iniciarMenu como um objeto

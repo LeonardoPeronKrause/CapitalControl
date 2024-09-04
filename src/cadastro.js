@@ -2,31 +2,31 @@
 
 const db = require('./database.js');
 const rl = require('./readline.js');
-const perguntarDados = require('./utils.js');
-const menu = require('./menu.js');
+const { perguntarDados } = require('./utils.js');
+const { exibirMenu } = require('./menuUtils.js');
 
 
-const cadastrarAtivo = function() {
+const cadastrarAtivo = function(callback) {
     rl.question('1. Renda Variável\n2. Renda Fixa\nQual a categoria de ativo que você deseja cadastrar? ', function(opcao) {
         switch (opcao) {
             case '1':
                 rl.question('1. Ação Brasileira\n2. Fundo Imobiliário\n3. Ação Americana (BDR)\n4. Criptoativos\n Qual dos segmentos você deseja cadastrar? ', function(opcao) {
                     switch (opcao) {
                         case '1':
-                            cadastrarAcaoBrasileira();
+                            cadastrarAcaoBrasileira(callback);
                             break;
                         case '2':
-                            cadastrarFundoImobiliario();
+                            cadastrarFundoImobiliario(callback);
                             break;                        
                         case '3':
-                            cadastrarAcaoAmericana();
+                            cadastrarAcaoAmericana(callback);
                             break;
                         case '4':
-                            cadastrarCriptoativo();
+                            cadastrarCriptoativo(callback);
                             break;
                         default:
                             console.log('Opção inválida. Tente novamente...');
-                            cadastrarAtivo();
+                            cadastrarAtivo(callback);
                             break;
                     }
                 });
@@ -35,24 +35,24 @@ const cadastrarAtivo = function() {
                 rl.question('1. Selic\n2. IPCA\n3. CDI\nQual o indexador do seu investimento em renda fixa? ', function(opcao) {
                     switch (opcao) {
                         case '1':
-                            cadastrarRFSelic();
+                            cadastrarRFSelic(callback);
                             break;
                         case '2':
-                            cadastrarRFIPCA();
+                            cadastrarRFIPCA(callback);
                             break;
                         case '3':
-                            cadastrarRFCDI();
+                            cadastrarRFCDI(callback);
                             break;
                         default:
                             console.log('Opção inválida. Tente novamente...');
-                            cadastrarAtivo();
+                            cadastrarAtivo(callback);
                             break;
                     }
                 });
                 break;
             default:
                 console.log('Opção inválida. Tente novamente...')
-                cadastrarAtivo();
+                cadastrarAtivo(callback);
                 break;
         }
     });
@@ -117,7 +117,7 @@ const cadastrarFundoImobiliario = function() {
     
         if (!nome || !ticker || !pm || !setor || !quantidade) {
             console.log('Todos os campos precisam ser preenchidos');
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         // Convertendo os valores para maiusculo para não dar problemas no db
@@ -130,7 +130,7 @@ const cadastrarFundoImobiliario = function() {
 
         if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
             console.log('Preço médio ou quantidade de ações inválidos.')
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         const query = `INSERT INTO fii (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
@@ -154,7 +154,7 @@ const cadastrarAcaoAmericana = function() {
 
         if (!nome || !ticker || !pm || !setor || !quantidade) {
             console.log('Todos os campos precisam ser preenchidos');
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         // Convertendo os valores para maiusculo para não dar problemas no db
@@ -167,13 +167,13 @@ const cadastrarAcaoAmericana = function() {
 
         if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
             console.log('Preço médio ou quantidade de ações inválidos.')
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         const query = `INSERT INTO bdr (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
         const values = [nome, ticker, precoMedio, setor, quantidadeCotas];   
         
-        cadastro.executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, menu.exibirMenu);
+        db.executarQuery(query, values, `A ação ${nome} (${ticker}) foi cadastrada com sucesso!`, exibirMenu);
     });
 };
 
@@ -191,7 +191,7 @@ const cadastrarCriptoativo = function() {
 
         if (!nome || !ticker || !pm || !quantidade) {
             console.log('Os campos de nome, ticker, preço médio e quantidade devem ser preenchidos.');
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         // Convertendo os valores para maiusculo para não dar problemas no db
@@ -204,7 +204,7 @@ const cadastrarCriptoativo = function() {
 
         if (isNaN(precoMedio) || isNaN(quantidadeCotas)) {
             console.log('Preço médio ou quantidade de ações inválidos.')
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         const query = `INSERT INTO cripto (nome, ticker, pm, setor, quantidade) VALUES ($1, $2, $3, $4, $5)`;
@@ -228,7 +228,7 @@ const cadastrarRFSelic = function() {
 
         if (!nome || !pm || !vencimento || !taxaJuros) {
             console.log('Os campos de nome, preço médio, vencimento e taxa de juros devem ser preenchidos!');
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         // Convertendo os valores para maiusculo para não dar problemas no db
@@ -240,7 +240,7 @@ const cadastrarRFSelic = function() {
 
         if (isNaN(precoMedio) || isNaN(quantidadeCotas) || isNaN(juros)) {
             console.log('Preço médio, quantidade ou taxa de juros são inválidos, digite  apenas números!')
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         const query = `INSERT INTO selic (nome, pm, vencimento, quantidade, taxaJuros) VALUES ($1, $2, $3, $4, $5)`;
@@ -264,7 +264,7 @@ const cadastrarRFIPCA = function() {
 
         if (!nome || !pm || !vencimento || !taxaJuros) {
             console.log('Os campos de nome, preço médio, vencimento e taxa de juros devem ser preenchidos!');
-            return menu.exibirMenu();  // Chama a função corretamente
+            return exibirMenu();  // Chama a função corretamente
         }
 
         // Convertendo os valores para maiusculo para não dar problemas no db
@@ -276,7 +276,7 @@ const cadastrarRFIPCA = function() {
 
         if (isNaN(precoMedio) || isNaN(quantidadeCotas) || isNaN(juros)) {
             console.log('Preço médio, quantidade ou taxa de juros são inválidos, digite  apenas números!');
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         const query = `INSERT INTO ipca (nome, pm, vencimento, quantidade, taxaJuros) VALUES ($1, $2, $3, $4, $5)`;
@@ -288,10 +288,10 @@ const cadastrarRFIPCA = function() {
 
 const cadastrarRFCDI = function() {
     const perguntas = [
-        'Nome: ',
-        'Preço Médio: ',
+        'Nome do ativo: ',
+        'Preço médio de compra: ',
         'Data de vencimento: ',
-        'Quantidade: ',
+        'Quantidade de cotas: ',
         'Taxa de juros: '
     ]
 
@@ -300,7 +300,7 @@ const cadastrarRFCDI = function() {
 
         if (!nome || !pm || !vencimento || !taxaJuros) {
             console.log('Os campos de nome, preço médio, vencimento e taxa de juros devem ser preenchidos!');
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
         // Convertendo os valores para maiusculo para não dar problemas no db
@@ -312,10 +312,10 @@ const cadastrarRFCDI = function() {
 
         if (isNaN(precoMedio) || isNaN(quantidadeCotas) || isNaN(juros)) {
             console.log('Preço médio, quantidade e taxa de juros, devem ser números!');
-            return menu.exibirMenu();
+            return exibirMenu();
         }
 
-        const query = `INSERT INTO cdi (nome, precoMedio, vencimento, quantidadeCotas, juros) VALUES ($1, $2, $3, $4, $5)`;
+        const query = `INSERT INTO cdi (nome, pm, vencimento, quantidade, taxaJuros) VALUES ($1, $2, $3, $4, $5)`;
         const values = [nome, precoMedio, vencimento, quantidadeCotas, juros];
 
         db.executarQuery(query, values, `A aplicação em CDI ${nome} foi cadastrada com sucesso!`, exibirMenu);

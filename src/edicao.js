@@ -4,6 +4,7 @@
 const rl = require('./readline'); // Módulo para leitura de entradas do usuário
 const db = require('./database'); // Módulo para interação com o banco de dados
 const sair = require('./sair');
+const iniciarMenu = require('./menu');
 
 // Função que exibe o menu principal de edição
 function exibirMenuEdicao() {
@@ -46,7 +47,7 @@ function exibirMenuEdicao() {
                 break;
             default:
                 console.log('Opção inválida. Tente novamente.'); // Mensagem de erro
-                exibirMenu(); // Exibe o menu novamente
+                iniciarMenu(); // Exibe o menu novamente
                 break;
         }
     });
@@ -61,13 +62,13 @@ function edicaoRendaVariavel(tabela, tipoAtivo) {
     db.query(query, (err, results) => {
         if (err) {
             console.log(`Erro ao buscar dados de ${tipoAtivo}!`, err.message); // Mensagem de erro
-            return exibirMenu(); // Retorna ao menu
+            return iniciarMenu(); // Retorna ao menu
         }
 
         // Verifica se a query retornou algum resultado.
         if (results.length === 0) {
             console.log(`Nenhum(a) ${tipoAtivo} cadastrado até o momento!`); // Mensagem caso não haja resultados
-            return exibirMenu(); // Retorna ao menu
+            return iniciarMenu(); // Retorna ao menu
         }
 
         // Exibe os ativos disponíveis para edição
@@ -86,12 +87,12 @@ function edicaoRendaFixa(tabela, tipoAtivo) {
     db.query(query, (err, results) => {
         if (err) {
             console.log(`Erro ao buscar dados de ${tabela}!`, err.message); // Mensagem de erro
-            return exibirMenu(); // Retorna ao menu
+            return iniciarMenu(); // Retorna ao menu
         }
 
         if (results.length === 0) {
             console.log(`Nenhum ativo de ${tipoAtivo} cadastrado até o momento!`); // Mensagem caso não haja resultados
-            return exibirMenu(); // Retorna ao menu
+            return iniciarMenu(); // Retorna ao menu
         }
 
         console.log(`Ativos de ${tipoAtivo} disponíveis para edição:`);
@@ -164,11 +165,11 @@ function editarAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
                                         } else {
                                             console.log(`${tipoAtivo} atualizado com sucesso!`); // Mensagem de sucesso
                                         }
-                                        exibirMenu(); // Retorna ao menu
+                                        iniciarMenu(); // Retorna ao menu
                                     });
                                 } else {
                                     console.log('Nenhuma atualização realizada.'); // Mensagem se não houver atualizações.
-                                    exibirMenu(); // Retorna ao menu
+                                    iniciarMenu(); // Retorna ao menu
                                 }
                             });
                         });
@@ -177,7 +178,7 @@ function editarAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
             });
         } else {
             console.log('Número inválido. Tente novamente.'); // Mensagem de erro se o número do ativo for inválido.
-            exibirMenu(); // Retorna ao menu
+            iniciarMenu(); // Retorna ao menu
         }
     });
 }
@@ -239,11 +240,11 @@ function editarAtivoFixoSelecionado(tabela, tipoAtivo, results) {
                                         } else {
                                             console.log(`${tipoAtivo} atualizado com sucesso!`); // Mensagem de sucesso
                                         }
-                                        exibirMenu(); // Retorna ao menu
+                                        iniciarMenu(); // Retorna ao menu
                                     });
                                 } else {
                                     console.log('Nenhuma atualização realizada.'); // Mensagem se não houver atualizações.
-                                    exibirMenu(); // Retorna ao menu
+                                    iniciarMenu(); // Retorna ao menu
                                 }
                             });
                         });
@@ -252,7 +253,7 @@ function editarAtivoFixoSelecionado(tabela, tipoAtivo, results) {
             });
         } else {
             console.log('Número inválido. Tente novamente.'); // Mensagem de erro se o número do ativo for inválido.
-            exibirMenu(); // Retorna ao menu
+            iniciarMenu(); // Retorna ao menu
         }
     });
 }

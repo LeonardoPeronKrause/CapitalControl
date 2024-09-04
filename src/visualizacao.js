@@ -3,7 +3,7 @@
 // Importa os módulos necessários
 const db = require('./database.js');    // Módulo p interagir c o db
 const rl = require('./readline.js');    // Módulo p manipulação da entrada de dados via terminal
-const { exibirMenu } = require('./menu.js')
+const { exibirMenu } = require('./menuUtils.js')
 
 // Função para visualizar os ativos de investimeno
 const verAtivos = function() {
@@ -22,8 +22,8 @@ const verAtivos = function() {
                                 } else {
                                     console.log('Dados das ações:', results); // Exibe os resultado das ações
                                 }
-                                exibirMenu(); // Exibe o menu apóes consulta
                             });
+                            exibirMenu(); // Exibe o menu apóes consulta
                             break;
                         case '2':
                             const queryFii = 'SELECT * FROM fii'; // Consulta para fundos imobiliários
