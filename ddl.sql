@@ -39,11 +39,7 @@ create table selic (
 	nome varchar(100) not null,
 	pm decimal(10,2) not null,
 	vencimento date not null,
-<<<<<<< HEAD
 	quantidade decimal(10,2) not null default 1,
-=======
-	quantidade decimal(10,2) not null,
->>>>>>> 95948d1ff2e2edca0caabe406ab39b442224d489
 	taxaJuros decimal(5,2) not null
 )
 
@@ -62,5 +58,10 @@ create table cdi (
 	pm decimal(10,2) not null,
 	vencimento date not null,
 	quantidade decimal(10,2) not null,
-	taxaJuros decimal(5,2) not null
+	taxaJuros decimal(5,0) not null
 )
+
+/*
+alter table cdi
+alter column taxaJuros type decimal(5,0)
+*/
