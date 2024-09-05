@@ -7,6 +7,7 @@ const { editarAtivo } = require('./edicao.js');
 const { excluirAtivo } = require('./exclusao.js');
 const { fazerBackup } = require('./backup.js');
 const { exibirMenu } = require('./menuUtils.js');
+const { sair } = require('./sair.js');
 
 function iniciarMenu() {
     exibirMenu(function(opcao) {
@@ -27,7 +28,7 @@ function iniciarMenu() {
                 fazerBackup(iniciarMenu);
                 break;
             case '6':
-                console.log('Saindo...');
+                sair();
                 rl.close(); // Fecha a interface readline
                 break;
             default:

@@ -180,7 +180,7 @@ const cadastrarAcaoAmericana = function() {
 const cadastrarCriptoativo = function() {
     const perguntas = [
         'Nome do criptoativo: ',
-        'Ticker: (EX: BTC)',
+        'Ticker: (EX: BTC) ',
         'Preço médio de compra: ',
         'Setor: (opcional) ',
         'Quantidade: '
@@ -236,7 +236,7 @@ const cadastrarRFSelic = function() {
 
         const precoMedio = parseFloat(pm.replace(',', '.'));
         const quantidadeCotas = quantidade ? parseFloat(quantidade.replace(',', '.')) : 1;
-        const juros = parseFloat(taxaJuros.replace(',', '.'));
+        const juros = parseFloat(taxaJuros.replace(',', '.').replace('%', ''));
 
         if (isNaN(precoMedio) || isNaN(quantidadeCotas) || isNaN(juros)) {
             console.log('Preço médio, quantidade ou taxa de juros são inválidos, digite  apenas números!')
@@ -272,7 +272,7 @@ const cadastrarRFIPCA = function() {
 
         const precoMedio = parseFloat(pm.replace(',', '.'));
         const quantidadeCotas = quantidade ? parseFloat(quantidade.replace(',', '.')) : 1;
-        const juros = parseFloat(taxaJuros.replace(',', '.'));
+        const juros = parseFloat(taxaJuros.replace(',', '.').replace('%', ''));
 
         if (isNaN(precoMedio) || isNaN(quantidadeCotas) || isNaN(juros)) {
             console.log('Preço médio, quantidade ou taxa de juros são inválidos, digite  apenas números!');
@@ -293,7 +293,7 @@ const cadastrarRFCDI = function() {
         'Data de vencimento: ',
         'Quantidade de cotas: ',
         'Taxa de juros: '
-    ]
+    ];
 
     perguntarDados(perguntas, function(respostas) {
         let [nome, pm, vencimento, quantidade, taxaJuros] = respostas;
@@ -308,7 +308,7 @@ const cadastrarRFCDI = function() {
 
         const precoMedio = parseFloat(pm.replace(',', '.'));
         const quantidadeCotas = quantidade ? parseFloat(quantidade.replace(',', '.')) : 1;
-        const juros = parseFloat(taxaJuros.replace(',', '.'));
+        const juros = parseFloat(taxaJuros.replace(',', '.').replace('%', ''));
 
         if (isNaN(precoMedio) || isNaN(quantidadeCotas) || isNaN(juros)) {
             console.log('Preço médio, quantidade e taxa de juros, devem ser números!');

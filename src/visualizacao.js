@@ -5,6 +5,38 @@ const db = require('./database.js');    // Módulo p interagir c o db
 const rl = require('./readline.js');    // Módulo p manipulação da entrada de dados via terminal
 const { exibirMenu } = require('./menuUtils.js')
 
+function formatarResultadoRF(ativos) {
+    if (ativos.rowCount === 0) {
+        console.log('Nenhum avito encontrado.');
+    } else {
+        ativos.rows.forEach((ativo, index) => {
+            console.log(`Ativo ${index + 1}`);
+            console.log(`  Nome: ${ativo.nome}`);
+            console.log(`  Preço Médio: ${ativo.pm}`);
+            console.log(`  Vencimento: ${ativo.vencimento}`);
+            console.log(`  Quantidade: ${ativo.quantidade}`);
+            console.log(`  Taxa de Juros: ${ativo.taxajuros} %`);
+            console.log(`------------------------`);
+        });
+    }
+}
+
+function formatarResultadoRV(ativos) {
+    if (ativos.rowCount === 0) {
+        console.log('Nenhum ativo encontrado.');
+    } else {
+        ativos.rows.forEach((ativo, index) => {
+            console.log(`Ativo ${index + 1}:`);
+            console.log(`  Nome: ${ativo.nome}`);
+            console.log(`  Ticker: ${ativo.ticker}`);
+            console.log(`  Preço Médio: R$ ${ativo.pm}`);
+            console.log(`  Setor: ${ativo.setor}`);
+            console.log(`  Quantidade: ${ativo.quantidade}`);
+            console.log('------------------------');
+        });
+    }
+}
+
 // Função para visualizar os ativos de investimeno
 const verAtivos = function() {
     // Pergunta ao usuário ql tipo de investimento deseja ver
@@ -20,10 +52,10 @@ const verAtivos = function() {
                                 if (err) {
                                     console.log('Erro ao puxar dados: ', err.message); // Exibe erro (se houver)
                                 } else {
-                                    console.log('Dados das ações:', results); // Exibe os resultado das ações
+                                    formatarResultadoRV(results); // Chama a função para formatar renda variável
                                 }
+                                exibirMenu(); // Exibe o menu apóes consulta
                             });
-                            exibirMenu(); // Exibe o menu apóes consulta
                             break;
                         case '2':
                             const queryFii = 'SELECT * FROM fii'; // Consulta para fundos imobiliários
@@ -31,7 +63,7 @@ const verAtivos = function() {
                                 if (err) {
                                     console.log('Erro ao puxar dados: ', err.message) // Erro (se houver)
                                 } else {
-                                    console.log('Dados dos Fundos Imobiliários:', results); // Exibe os resultados dos FIIs
+                                    formatarResultadoRV(results); // Chama a função para formatar renda variável
                                 }
                                 exibirMenu(); // Exibe o menu após a consulta
                             });
@@ -42,7 +74,7 @@ const verAtivos = function() {
                                 if (err) {
                                     console.log('Erro ao puxar dados: ', err.message); // Erro se houver
                                 } else {
-                                    console.log('Dados das Ações americanas: ', results); // Exibe os resultados das ações americanas
+                                    formatarResultadoRV(results); // Chama a função para formatar renda variável
                                 }
                                 exibirMenu(); // Menu após a consulta
                             });
@@ -53,7 +85,7 @@ const verAtivos = function() {
                                 if (err) {
                                     console.log('Erro ao puxar dados: ', err.message); // Erro (se houver)
                                 } else {
-                                    console.log('Dados das Criptomoedas: ', results); // Exibe os resultados das criptomoedas
+                                    formatarResultadoRV(results); // Chama a função para formatar renda variável
                                 }
                                 exibirMenu(); // Menu após a consulta
                             });
@@ -75,7 +107,7 @@ const verAtivos = function() {
                                 if (err) {
                                     console.log('Erro ao puxar dados: ', err.message); // Erro (se houver)
                                 } else {
-                                    console.log('Dados de Selic: ', results); // Exibe os resultados da Selic
+                                    formatarResultadoRF(results); // Chama a função para formatar renda fixa
                                 }
                                 exibirMenu(); // Menu após a consulta
                             });
@@ -86,7 +118,7 @@ const verAtivos = function() {
                                 if (err) {
                                     console.log('Erro ao puxar dados: ', err.message); // Erro (se houver)
                                 } else {
-                                    console.log('Dados de IPCA: ', results); // Exibe os resultados do IPCA
+                                    formatarResultadoRF(results); // Chama a função para formatar renda fixa
                                 }
                                 exibirMenu(); // Menu apos consulta
                             });
@@ -97,7 +129,8 @@ const verAtivos = function() {
                                 if (err) {
                                     console.log('Erro ao puxar dados: ', err.message) // Erro (se houver)
                                 } else {
-                                    console.log('Dados de CDI: ', results) // Exibe os resultados do CDI
+                                    console.log(results.rows); // Adicione esta linha
+                                    formatarResultadoRF(results); // Chama a função para formatar renda fixa
                                 }
                                 exibirMenu(); // Menu após consulta
                             });

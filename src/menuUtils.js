@@ -11,7 +11,7 @@ const exibirMenu = function(callback) {
     console.log('5. Fazer Backup');
     console.log('6. Sair');
 
-    rl.question('Escolha uma opção: ', function(opcao) {
+    rl.question('Escolha uma opção: ', (opcao) => {
         callback(opcao);
     });
 };
