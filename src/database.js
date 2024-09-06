@@ -1,3 +1,5 @@
+'use strict';
+
 const { Pool } = require('pg');
 
 // Cria uma nova instância do Pool p gerenciar as conexoes c o db 

@@ -1,5 +1,5 @@
 'use strict';
 
-const { controlador } = require('./controller.js');
+const { main } = require('./main.js');
 
-controlador();
+main();

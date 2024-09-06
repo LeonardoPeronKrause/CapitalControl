@@ -2,13 +2,10 @@
 
 const rl = require('./readline.js');
 const { cadastrarAtivo } = require('./cadastro.js');
-const { verAtivos } = require('./visualizacao.js');
-const { editarAtivo } = require('./edicao.js');
-const { excluirAtivo } = require('./exclusao.js');
+const { exibirMenuEdicao } = require('./menuEdicao.js');
+const { exibirMenuExclusao } = require('./menuExclusao.js');
 const { fazerBackup } = require('./backup.js');
-const { exibirMenuEdicao } = require('./menuUtils.js');
 const { sair } = require('./sair.js');
-
 
 const exibirMenu = function(callback) {
     console.log('--- MENU ---');
@@ -31,13 +28,14 @@ function iniciarMenu() {
                 cadastrarAtivo(iniciarMenu);
                 break;
             case '2':
+                const { verAtivos } = require('./visualizacao.js');
                 verAtivos(iniciarMenu);
                 break;
             case '3':
                 exibirMenuEdicao(iniciarMenu);
                 break;
             case '4':
-                excluirAtivo(iniciarMenu);
+                exibirMenuExclusao(iniciarMenu);
                 break;
             case '5':
                 fazerBackup(iniciarMenu);

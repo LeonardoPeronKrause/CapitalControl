@@ -1,3 +1,5 @@
+'use strict';
+
 const rl = require('./readline.js');
 
 // Função para fazer perguntas ao usuário e coletar as respostas em um array

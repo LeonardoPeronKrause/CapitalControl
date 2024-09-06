@@ -3,11 +3,10 @@
 // Importa os módulos necessários
 const db = require('./database.js');    // Módulo p interagir c o db
 const rl = require('./readline.js');    // Módulo p manipulação da entrada de dados via terminal
-const { exibirMenu } = require('./menuUtils.js')
 
 function formatarResultadoRF(ativos) {
     if (ativos.rowCount === 0) {
-        console.log('Nenhum avito encontrado.');
+        console.log('Nenhum ativo encontrado.');
     } else {
         ativos.rows.forEach((ativo, index) => {
             console.log(`Ativo ${index + 1}`);
@@ -38,7 +37,7 @@ function formatarResultadoRV(ativos) {
 }
 
 // Função para visualizar os ativos de investimeno
-const verAtivos = function() {
+const verAtivos = function(exibirMenu) {
     // Pergunta ao usuário ql tipo de investimento deseja ver
     rl.question('1. Renda Variável\n2. Renda Fixa\nQual investimento você quer ver: ', function(opcao) {
         switch (opcao) {
@@ -54,7 +53,7 @@ const verAtivos = function() {
                                 } else {
                                     formatarResultadoRV(results); // Chama a função para formatar renda variável
                                 }
-                                exibirMenu(); // Exibe o menu apóes consulta
+                                exibirMenu(); // Exibe o menu após consulta
                             });
                             break;
                         case '2':
@@ -92,7 +91,7 @@ const verAtivos = function() {
                             break;
                         default:
                             console.log('Opção inválida. Tente novamente...'); // Mensagem para opção inválida
-                            verAtivos(); // Permite ao usuário tentar novamente
+                            verAtivos(exibirMenu); // Permite ao usuário tentar novamente
                             break;
                     }
                 });
@@ -137,14 +136,14 @@ const verAtivos = function() {
                             break;
                         default:
                             console.log('Opção inválida. Tente novamente...') // Mensagem para opção inválida
-                            verAtivos(); // Permite ao usuário tentar novamente
+                            verAtivos(exibirMenu); // Permite ao usuário tentar novamente
                             break;
                     }
                 });
                 break;
             default:
                 console.log('Opção inválida. Tente novamente...'); // Mensagem para opção inválida
-                verAtivos(); // Permite ao usuário tentar novamente
+                verAtivos(exibirMenu); // Permite ao usuário tentar novamente
                 break;
         } 
     });
