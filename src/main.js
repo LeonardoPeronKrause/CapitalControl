@@ -18,10 +18,10 @@ function main() {
                 cadastrarAtivo(() => main());
                 break;
             case '2':
-                exibirMenuEdicao(() => main());
+                verAtivos(() => main());
                 break;
             case '3':
-                verAtivos(() => main());
+                exibirMenuEdicao(() => main());
                 break;
             case '4':
                 exibirMenuExclusao(() => main());

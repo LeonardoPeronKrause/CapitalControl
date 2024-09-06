@@ -6,8 +6,23 @@ const { verAtivos } = require('./visualizacao.js');
 const { editarAtivo } = require('./edicao.js');
 const { excluirAtivo } = require('./exclusao.js');
 const { fazerBackup } = require('./backup.js');
-const { exibirMenu } = require('./menuUtils.js');
+const { exibirMenuEdicao } = require('./menuUtils.js');
 const { sair } = require('./sair.js');
+
+
+const exibirMenu = function(callback) {
+    console.log('--- MENU ---');
+    console.log('1. Cadastrar Ativo');
+    console.log('2. Visualizar Ativos');
+    console.log('3. Editar Ativo');
+    console.log('4. Excluir Ativo');
+    console.log('5. Fazer Backup');
+    console.log('6. Sair');
+
+    rl.question('Escolha uma opção: ', (opcao) => {
+        callback(opcao);
+    });
+};
 
 function iniciarMenu() {
     exibirMenu(function(opcao) {
@@ -19,7 +34,7 @@ function iniciarMenu() {
                 verAtivos(iniciarMenu);
                 break;
             case '3':
-                editarAtivo(iniciarMenu);
+                exibirMenuEdicao(iniciarMenu);
                 break;
             case '4':
                 excluirAtivo(iniciarMenu);
@@ -39,4 +54,7 @@ function iniciarMenu() {
     });
 }
 
-module.exports = { iniciarMenu }; // Exporta iniciarMenu como um objeto
+module.exports = { 
+    iniciarMenu,
+    exibirMenu
+ };

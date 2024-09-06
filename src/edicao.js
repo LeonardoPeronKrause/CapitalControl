@@ -4,7 +4,7 @@
 const rl = require('./readline'); // Módulo para leitura de entradas do usuário
 const db = require('./database'); // Módulo para interação com o banco de dados
 const sair = require('./sair');
-const iniciarMenu = require('./menu');
+const { iniciarMenu } = require('./menu');
 
 // Função que exibe o menu principal de edição
 function exibirMenuEdicao() {
@@ -73,7 +73,7 @@ function edicaoRendaVariavel(tabela, tipoAtivo) {
 
         // Exibe os ativos disponíveis para edição
         console.log(`${tipoAtivo} disponíveis para edição:`);
-        results.forEach((ativo, index) => {
+        results.rows.forEach((ativo, index) => {
             console.log(`${index + 1}. '${ativo.nome}' (${ativo.ticker}) Preço Médio: ${ativo.pm} Setor: ${ativo.setor} Quantidade: ${ativo.quantidade}`);
         });
         editarAtivoVariavelSelecionado(tabela, tipoAtivo, results); // Chama a função para editar o ativo selecionado
@@ -96,7 +96,7 @@ function edicaoRendaFixa(tabela, tipoAtivo) {
         }
 
         console.log(`Ativos de ${tipoAtivo} disponíveis para edição:`);
-        results.forEach((ativo, index) => {
+        results.rows.forEach((ativo, index) => {
             console.log(`${index+1}. '${ativo.nome}' Preço Médio: ${ativo.pm} Vencimento: ${ativo.vencimento} Quantidade de cotas: ${ativo.quantidade} Taxa de Juros: ${ativo.taxaJuros}`);
         });
         editarAtivoFixoSelecionado(tabela, tipoAtivo, results); // Chama a função para editar o ativo selecionado
