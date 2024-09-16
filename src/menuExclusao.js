@@ -19,7 +19,7 @@ function exibirMenuExclusao() {
     rl.question('Escolha uma opçao: ', (opcao) => {
         switch (opcao) {
             case '1':
-                exclusaoRendaVariavel('acao', 'Ação Brasileira');
+                exclusaoRendaVariavel('acoes', 'Ação Brasileira');
                 break;
             case '2':
                 exclusaoRendaVariavel('fii', 'Fundo Imobiliário');
