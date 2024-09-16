@@ -2,6 +2,8 @@
 
 const rl = require('./readline');
 const db = require('./database');
+const { exibirMenu } = require('./menu');
+
 
 function exclusaoRendaVariavel(tabela, tipoAtivo) {
     const query = `SELECT * FROM ${tabela}`;
@@ -12,13 +14,13 @@ function exclusaoRendaVariavel(tabela, tipoAtivo) {
             return exibirMenu();
         }
 
-        if (results.length === 0) {
+        if (results.rows.length === 0) {
             console.log(`Nenhum(a) ${tipoAtivo} cadastrado até o momento!`);
             return exibirMenu();
         }
 
         console.log(`${tipoAtivo} disponíveis para edição:`);
-        results.forEach((ativo, index) => {
+        results.rows.forEach((ativo, index) => {
             console.log(`${index + 1} '${ativo.nome}' (${ativo.ticker}) Preço Médio: ${ativo.pm} Setor: ${ativo.setor} Quantidade: ${ativo.quantidade}`);
         });
         excluirAtivoVariavelSelecionado(tabela, tipoAtivo, results);
@@ -34,13 +36,13 @@ function exclusaoRendaFixa(tabela, tipoAtivo) {
             return exibirMenu();
         }
 
-        if (results.length === 0) {
+        if (results.rows.length === 0) {
             console.log(`Nenhum ativo de ${tipoAtivo} cadastrado até o momento!`);
             return exibirMenu();
         }
 
         console.log(`Ativos de ${tipoAtivo} disponíveis para exclusão:`);
-        results.forEach((ativo, index) => {
+        results.rows.forEach((ativo, index) => {
             console.log(`${index + 1}. '${ativo.nome}' Preço Médio: ${ativo.pm} Vencimento: ${ativo.vencimento} Quantidade de Cotas: ${ativo.quantidade} Taxa de Juros: ${ativo.taxaJuros}`);
         });
         excluirAtivoFixoSelecionado(tabela, tipoAtivo, results);

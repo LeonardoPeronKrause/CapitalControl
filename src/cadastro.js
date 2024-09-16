@@ -3,6 +3,7 @@
 const db = require('./database.js');
 const rl = require('./readline.js');
 const { perguntarDados } = require('./utils.js');
+const { exibirMenu } = require('./menu')
 
 const cadastrarAtivo = function(callback) {
     rl.question('1. Renda Variável\n2. Renda Fixa\nQual a categoria de ativo que você deseja cadastrar? ', function(opcao) {

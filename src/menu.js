@@ -1,7 +1,6 @@
 'use strict';
 
 const rl = require('./readline.js');
-const { cadastrarAtivo } = require('./cadastro.js');
 const { exibirMenuEdicao } = require('./menuEdicao.js');
 const { exibirMenuExclusao } = require('./menuExclusao.js');
 const { fazerBackup } = require('./backup.js');
@@ -25,6 +24,7 @@ function iniciarMenu() {
     exibirMenu(function(opcao) {
         switch (opcao) {
             case '1':
+                const { cadastrarAtivo } = require('./cadastro.js');
                 cadastrarAtivo(iniciarMenu);
                 break;
             case '2':
