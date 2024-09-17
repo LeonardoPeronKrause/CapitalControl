@@ -18,7 +18,7 @@ function edicaoRendaVariavel(tabela, tipoAtivo) {
         }
 
         // Verifica se a query retornou algum resultado.
-        if (results.length === 0) {
+        if (results.rows.length === 0) {
             console.log(`Nenhum(a) ${tipoAtivo} cadastrado até o momento!`); // Mensagem caso não haja resultados
             return iniciarMenu(); // Retorna ao menu
         }
@@ -42,7 +42,7 @@ function edicaoRendaFixa(tabela, tipoAtivo) {
             return iniciarMenu(); // Retorna ao menu
         }
 
-        if (results.length === 0) {
+        if (results.rows.length === 0) {
             console.log(`Nenhum ativo de ${tipoAtivo} cadastrado até o momento!`); // Mensagem caso não haja resultados
             return iniciarMenu(); // Retorna ao menu
         }
@@ -62,8 +62,8 @@ function editarAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
         const index = parseInt(numero) - 1; // Converte a entrada do usuário para um índice de array.
 
         // Verifica se o índice fornecido é válido.
-        if (index >= 0 && index < results.length) {
-            const ativoSelecionado = results[index]; // Seleciona o ativo correspondente ao índice.
+        if (index >= 0 && index < results.rows.length) {
+            const ativoSelecionado = results.rows[index]; // Seleciona o ativo correspondente ao índice.
 
             console.log('Se você deixar em branco, os valores não alterarão!'); // Mensagem informativa
 
@@ -89,8 +89,10 @@ function editarAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
 
                                 // Adiciona a atualização do pm se o novo pm não estiver em branco.
                                 if (novoPm.trim() !== '') {
+                                    // Converte o novo preço médio para float, trocando ',' por '.'
+                                    const precoMedio = parseFloat(novoPm.replace(',', '.'));
                                     updates.push('pm = ?');
-                                    params.push(novoPm);
+                                    params.push(precoMedio);
                                 }
 
                                 // Adiciona a atualização do setor se o novo setor não estiver em branco.
@@ -140,8 +142,8 @@ function editarAtivoFixoSelecionado(tabela, tipoAtivo, results) {
     rl.question('Qual o número do ativo que você deseja editar? ', function(numero) {
         const index = parseInt(numero) - 1; // Converte a entrada do usuário para um índice de array.
 
-        if (index >= 0 && index < results.length) {
-            const ativoSelecionado = results[index]; // Seleciona o ativo correspondente ao índice.
+        if (index >= 0 && index < results.rows.length) {
+            const ativoSelecionado = results.rows[index]; // Seleciona o ativo correspondente ao índice.
 
             console.log('Se você deixar espaços em branco, os valores não alterarão!'); // Mensagem informativa
 
@@ -161,8 +163,10 @@ function editarAtivoFixoSelecionado(tabela, tipoAtivo, results) {
                                 }
                                 // Adiciona a atualização do preço médio se o novo preço não estiver em branco.
                                 if (novoPm.trim() !== '') {
+                                    // Converte o novo preço médio para float, trocando ',' por '.'.
+                                    const precoMedio = parseFloat(novoPm.replace(',', '.'));
                                     updates.push('pm = ?');
-                                    params.push(novoPm);
+                                    params.push(precoMedio);
                                 }
                                 // Adiciona a atualização da data de vencimento se a nova data não estiver em branco.
                                 if (novoVencimento.trim() !== '') {
@@ -214,4 +218,4 @@ function editarAtivoFixoSelecionado(tabela, tipoAtivo, results) {
 module.exports = {
     edicaoRendaFixa,
     edicaoRendaVariavel
-}
+};

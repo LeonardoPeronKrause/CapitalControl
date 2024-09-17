@@ -3,6 +3,7 @@
 // Importa os módulos necessários
 const db = require('./database.js');    // Módulo p interagir c o db
 const rl = require('./readline.js');    // Módulo p manipulação da entrada de dados via terminal
+const { exibirMenu } = require('./menu.js');  // Já está importado aqui
 
 function formatarResultadoRF(ativos) {
     if (ativos.rowCount === 0) {
@@ -36,116 +37,113 @@ function formatarResultadoRV(ativos) {
     }
 }
 
-// Função para visualizar os ativos de investimeno
-const verAtivos = function(exibirMenu) {
-    // Pergunta ao usuário ql tipo de investimento deseja ver
+// Função para visualizar os ativos de investimento
+const verAtivos = function() {
+    // Pergunta ao usuário qual tipo de investimento deseja ver
     rl.question('1. Renda Variável\n2. Renda Fixa\nQual investimento você quer ver: ', function(opcao) {
         switch (opcao) {
             case '1': // Renda Variável
-            // Pergunta qual ativo especifico o usuario quer ver
                 rl.question('1. Ação Brasileira\n2. Fundo Imobiliário\n3. Ação Americana (BDR)\n4. Criptoativos\nEscolha o ativo que você deseja visualizar: ', function(opcao) {
                     switch (opcao) {
                         case '1':
-                            const queryAcao = 'SELECT * FROM acoes'; // Consulta para ações brasileiras
+                            const queryAcao = 'SELECT * FROM acoes';
                             db.query(queryAcao, (err, results) => {
                                 if (err) {
-                                    console.log('Erro ao puxar dados: ', err.message); // Exibe erro (se houver)
+                                    console.log('Erro ao puxar dados: ', err.message);
                                 } else {
-                                    formatarResultadoRV(results); // Chama a função para formatar renda variável
+                                    formatarResultadoRV(results);
                                 }
-                                exibirMenu(); // Exibe o menu após consulta
+                                exibirMenu(); // Exibe o menu após a consulta
                             });
                             break;
                         case '2':
-                            const queryFii = 'SELECT * FROM fii'; // Consulta para fundos imobiliários
+                            const queryFii = 'SELECT * FROM fii';
                             db.query(queryFii, (err, results) => {
                                 if (err) {
-                                    console.log('Erro ao puxar dados: ', err.message) // Erro (se houver)
+                                    console.log('Erro ao puxar dados: ', err.message);
                                 } else {
-                                    formatarResultadoRV(results); // Chama a função para formatar renda variável
+                                    formatarResultadoRV(results);
                                 }
                                 exibirMenu(); // Exibe o menu após a consulta
                             });
                             break;
                         case '3':
-                            const queryBdr = 'SELECT * FROM bdr'; // Consulta para BDRs
+                            const queryBdr = 'SELECT * FROM bdr';
                             db.query(queryBdr, (err, results) => {
                                 if (err) {
-                                    console.log('Erro ao puxar dados: ', err.message); // Erro se houver
+                                    console.log('Erro ao puxar dados: ', err.message);
                                 } else {
-                                    formatarResultadoRV(results); // Chama a função para formatar renda variável
+                                    formatarResultadoRV(results);
                                 }
-                                exibirMenu(); // Menu após a consulta
+                                exibirMenu(); // Exibe o menu após a consulta
                             });
                             break;
                         case '4':
-                            const queryCripto = 'SELECT * FROM cripto'; // Consulta para criptomoedas
+                            const queryCripto = 'SELECT * FROM cripto';
                             db.query(queryCripto, (err, results) => {
                                 if (err) {
-                                    console.log('Erro ao puxar dados: ', err.message); // Erro (se houver)
+                                    console.log('Erro ao puxar dados: ', err.message);
                                 } else {
-                                    formatarResultadoRV(results); // Chama a função para formatar renda variável
+                                    formatarResultadoRV(results);
                                 }
-                                exibirMenu(); // Menu após a consulta
+                                exibirMenu(); // Exibe o menu após a consulta
                             });
                             break;
                         default:
-                            console.log('Opção inválida. Tente novamente...'); // Mensagem para opção inválida
-                            verAtivos(exibirMenu); // Permite ao usuário tentar novamente
+                            console.log('Opção inválida. Tente novamente...');
+                            verAtivos(); // Permite ao usuário tentar novamente
                             break;
                     }
                 });
                 break;
             case '2': // Renda Fixa
-                // Pergunta qual indexador de renda fixa o usuário deseja visualizar
-                rl.question('1. Selic\n2. IPCA\n3. CDI\nEscolha qual o indexador da renda fixa que vocÊ deseja visualizar: ', function(opcao) {
+                rl.question('1. Selic\n2. IPCA\n3. CDI\nEscolha qual o indexador da renda fixa que você deseja visualizar: ', function(opcao) {
                     switch (opcao) {
                         case '1':
-                            const querySelic = 'SELECT * FROM selic'; // Consulta para Selic
+                            const querySelic = 'SELECT * FROM selic';
                             db.query(querySelic, (err, results) => {
                                 if (err) {
-                                    console.log('Erro ao puxar dados: ', err.message); // Erro (se houver)
+                                    console.log('Erro ao puxar dados: ', err.message);
                                 } else {
-                                    formatarResultadoRF(results); // Chama a função para formatar renda fixa
+                                    formatarResultadoRF(results);
                                 }
-                                exibirMenu(); // Menu após a consulta
+                                exibirMenu(); // Exibe o menu após a consulta
                             });
                             break;
                         case '2':
-                            const queryIpca = 'SELECT * FROM ipca'; // Consulta para IPCA
+                            const queryIpca = 'SELECT * FROM ipca';
                             db.query(queryIpca, (err, results) => {
                                 if (err) {
-                                    console.log('Erro ao puxar dados: ', err.message); // Erro (se houver)
+                                    console.log('Erro ao puxar dados: ', err.message);
                                 } else {
-                                    formatarResultadoRF(results); // Chama a função para formatar renda fixa
+                                    formatarResultadoRF(results);
                                 }
-                                exibirMenu(); // Menu apos consulta
+                                exibirMenu(); // Exibe o menu após a consulta
                             });
                             break;
                         case '3':
-                            const queryCdi = 'SELECT * FROM cdi'; // Consulta para CDI
+                            const queryCdi = 'SELECT * FROM cdi';
                             db.query(queryCdi, (err, results) => {
                                 if (err) {
-                                    console.log('Erro ao puxar dados: ', err.message) // Erro (se houver)
+                                    console.log('Erro ao puxar dados: ', err.message);
                                 } else {
-                                    console.log(results.rows); // Adicione esta linha
-                                    formatarResultadoRF(results); // Chama a função para formatar renda fixa
+                                    formatarResultadoRF(results);
                                 }
-                                exibirMenu(); // Menu após consulta
+                                exibirMenu(); // Exibe o menu após a consulta
                             });
                             break;
                         default:
-                            console.log('Opção inválida. Tente novamente...') // Mensagem para opção inválida
-                            verAtivos(exibirMenu); // Permite ao usuário tentar novamente
+                            console.log('Opção inválida. Tente novamente...');
+                            verAtivos(); // Permite ao usuário tentar novamente
                             break;
                     }
                 });
                 break;
             default:
-                console.log('Opção inválida. Tente novamente...'); // Mensagem para opção inválida
-                verAtivos(exibirMenu); // Permite ao usuário tentar novamente
+                console.log('Opção inválida. Tente novamente...');
+                verAtivos(); // Permite ao usuário tentar novamente
                 break;
-        } 
+        }
     });
 };
 

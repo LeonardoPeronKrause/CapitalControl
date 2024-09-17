@@ -58,8 +58,8 @@ function excluirAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
 
         const index = parseInt(numero) - 1;
 
-        if (index >= 0 && index < results.length) {
-            const ativoSelecionado = results[index];
+        if (index >= 0 && index < results.rows.length) {
+            const ativoSelecionado = results.rows[index];
 
             rl.question(`Você tem certeza que deseja excluir o ativo ${ativoSelecionado.nome}? [Use = S para sim/N para não]: `, function(confirmacao) {
                 if (confirmacao.toUpperCase() === 'S') {
@@ -96,8 +96,8 @@ function excluirAtivoFixoSelecionado(tabela, tipoAtivo, results) {
 
         const index = parseInt(numero) - 1;
 
-        if (index >= 0 && index < results.length) {
-            const ativoSelecionado = results[index];
+        if (index >= 0 && index < results.rows.length) {
+            const ativoSelecionado = results.rows[index];
 
             rl.question(`Você tem certeza que deseja excluir o investimento ${ativoSelecionado.nome} de ${tipoAtivo}? [Use S para sim/N para não]: `, function(confirmacao) {
                 if (confirmacao.toUpperCase() === 'S') {

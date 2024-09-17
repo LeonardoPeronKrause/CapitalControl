@@ -1,10 +1,6 @@
 'use strict';
 
 const rl = require('./readline.js');
-const { exibirMenuEdicao } = require('./menuEdicao.js');
-const { exibirMenuExclusao } = require('./menuExclusao.js');
-const { fazerBackup } = require('./backup.js');
-const { sair } = require('./sair.js');
 
 const exibirMenu = function(callback) {
     console.log('--- MENU ---');
@@ -20,7 +16,7 @@ const exibirMenu = function(callback) {
     });
 };
 
-function iniciarMenu() {
+const iniciarMenu = function() {
     exibirMenu(function(opcao) {
         switch (opcao) {
             case '1':
@@ -32,15 +28,19 @@ function iniciarMenu() {
                 verAtivos(iniciarMenu);
                 break;
             case '3':
+                const { exibirMenuEdicao } = require('./menuEdicao.js');
                 exibirMenuEdicao(iniciarMenu);
                 break;
             case '4':
+                const { exibirMenuExclusao } = require('./menuExclusao.js');
                 exibirMenuExclusao(iniciarMenu);
                 break;
             case '5':
+                const { fazerBackup } = require('./backup.js');
                 fazerBackup(iniciarMenu);
                 break;
             case '6':
+                const { sair } = require('./sair.js');
                 sair();
                 rl.close(); // Fecha a interface readline
                 break;
