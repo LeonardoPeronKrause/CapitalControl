@@ -3,7 +3,7 @@
 // Importa os módulos necessários
 const db = require('./database.js');    // Módulo p interagir c o db
 const rl = require('./readline.js');    // Módulo p manipulação da entrada de dados via terminal
-const { exibirMenu } = require('./menu.js');  // Já está importado aqui
+const { iniciarMenu } = require('./menu.js');  // Já está importado aqui
 
 function formatarResultadoRF(ativos) {
     if (ativos.rowCount === 0) {
@@ -38,9 +38,9 @@ function formatarResultadoRV(ativos) {
 }
 
 // Função para visualizar os ativos de investimento
-const verAtivos = function() {
+const verAtivos = function(callback) {
     // Pergunta ao usuário qual tipo de investimento deseja ver
-    rl.question('1. Renda Variável\n2. Renda Fixa\nQual investimento você quer ver: ', function(opcao) {
+    rl.question('1. Renda Variável\n2. Renda Fixa\n3. Voltar Menu\nQual investimento você quer ver: ', function(opcao) {
         switch (opcao) {
             case '1': // Renda Variável
                 rl.question('1. Ação Brasileira\n2. Fundo Imobiliário\n3. Ação Americana (BDR)\n4. Criptoativos\nEscolha o ativo que você deseja visualizar: ', function(opcao) {
@@ -53,7 +53,7 @@ const verAtivos = function() {
                                 } else {
                                     formatarResultadoRV(results);
                                 }
-                                exibirMenu(); // Exibe o menu após a consulta
+                                verAtivos(callback); // Exibe o menu após a consulta
                             });
                             break;
                         case '2':
@@ -64,7 +64,7 @@ const verAtivos = function() {
                                 } else {
                                     formatarResultadoRV(results);
                                 }
-                                exibirMenu(); // Exibe o menu após a consulta
+                                verAtivos(callback); // Exibe o menu após a consulta
                             });
                             break;
                         case '3':
@@ -75,7 +75,7 @@ const verAtivos = function() {
                                 } else {
                                     formatarResultadoRV(results);
                                 }
-                                exibirMenu(); // Exibe o menu após a consulta
+                                verAtivos(callback); // Exibe o menu após a consulta
                             });
                             break;
                         case '4':
@@ -86,7 +86,7 @@ const verAtivos = function() {
                                 } else {
                                     formatarResultadoRV(results);
                                 }
-                                exibirMenu(); // Exibe o menu após a consulta
+                                verAtivos(callback); // Exibe o menu após a consulta
                             });
                             break;
                         default:
@@ -107,7 +107,7 @@ const verAtivos = function() {
                                 } else {
                                     formatarResultadoRF(results);
                                 }
-                                exibirMenu(); // Exibe o menu após a consulta
+                                verAtivos(callback); // Exibe o menu após a consulta
                             });
                             break;
                         case '2':
@@ -118,7 +118,7 @@ const verAtivos = function() {
                                 } else {
                                     formatarResultadoRF(results);
                                 }
-                                exibirMenu(); // Exibe o menu após a consulta
+                                verAtivos(callback); // Exibe o menu após a consulta
                             });
                             break;
                         case '3':
@@ -129,19 +129,22 @@ const verAtivos = function() {
                                 } else {
                                     formatarResultadoRF(results);
                                 }
-                                exibirMenu(); // Exibe o menu após a consulta
+                                verAtivos(callback); // Exibe o menu após a consulta
                             });
                             break;
                         default:
                             console.log('Opção inválida. Tente novamente...');
-                            verAtivos(); // Permite ao usuário tentar novamente
+                            verAtivos(callback); // Permite ao usuário tentar novamente
                             break;
                     }
                 });
                 break;
+            case '3':
+                iniciarMenu();
+                break;
             default:
                 console.log('Opção inválida. Tente novamente...');
-                verAtivos(); // Permite ao usuário tentar novamente
+                verAtivos(callback); // Permite ao usuário tentar novamente
                 break;
         }
     });
