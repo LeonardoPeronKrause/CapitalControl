@@ -3,10 +3,10 @@
 const rl = require('./readline');
 const { edicaoRendaVariavel } = require('./edicao');
 const { edicaoRendaFixa } = require('./edicao');
-const { sair } = require('./sair');
+const { iniciarMenu } = require('./menu');
 
 function exibirMenuEdicao() {
-    console.log('\n=== Menu de Edição ===');
+    console.log('=== Menu de Edição ===');
     console.log('1. Editar Ações Brasileiras');
     console.log('2. Editar Fundos Imobiliários (FIIs)');
     console.log('3. Editar Ações Americanas');
@@ -41,7 +41,7 @@ function exibirMenuEdicao() {
                 edicaoRendaFixa('cdi', 'CDI'); // Edita ativos de CDI
                 break;
             case '8':
-                sair(); // Fecha a leitura
+                iniciarMenu(); // Fecha a leitura
                 break;
             default:
                 console.log('Opção inválida. Tente novamente.'); // Mensagem de erro

@@ -2,8 +2,7 @@
 
 const rl = require('./readline');
 const db = require('./database');
-const { exibirMenu } = require('./menu');
-
+const { iniciarMenu } = require('./menu');
 
 function exclusaoRendaVariavel(tabela, tipoAtivo) {
     const query = `SELECT * FROM ${tabela}`;
@@ -11,12 +10,12 @@ function exclusaoRendaVariavel(tabela, tipoAtivo) {
     db.query(query, (err, results) => {
         if (err) {
             console.log(`Erro ao buscar dados de ${tipoAtivo}!`, err.message);
-            return exibirMenu();
+            return iniciarMenu();
         }
 
         if (results.rows.length === 0) {
             console.log(`Nenhum(a) ${tipoAtivo} cadastrado até o momento!`);
-            return exibirMenu();
+            return iniciarMenu();
         }
 
         console.log(`${tipoAtivo} disponíveis para edição:`);
@@ -33,12 +32,12 @@ function exclusaoRendaFixa(tabela, tipoAtivo) {
     db.query(query, (err, results) => {
         if (err) {
             console.log(`Erro ao buscar dados de ${tipoAtivo}`);
-            return exibirMenu();
+            return iniciarMenu();
         }
 
         if (results.rows.length === 0) {
             console.log(`Nenhum ativo de ${tipoAtivo} cadastrado até o momento!`);
-            return exibirMenu();
+            return iniciarMenu();
         }
 
         console.log(`Ativos de ${tipoAtivo} disponíveis para exclusão:`);
@@ -53,7 +52,7 @@ function excluirAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
     rl.question('Qual o número do ativo que você deseja excluir? ', function(numero) {
         if (numero.trim() === '') {
             console.log('Nenhum ativo excluído!');
-            return exibirMenu();
+            return iniciarMenu();
         }
 
         const index = parseInt(numero) - 1;
@@ -70,19 +69,19 @@ function excluirAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
                         } else {
                             console.log(`O investimento no ativo ${ativoSelecionado.nome} foi excluído com sucesso!`);
                         }
-                        exibirMenu();
+                        iniciarMenu();
                     });
                 } else if (confirmacao.toUpperCase() === 'N') {
                     console.log('Nenhum ativo excluído!');
-                    exibirMenu();
+                    iniciarMenu();
                 } else {
                     console.log('Você digitou algo diferente de "S" para sim ou "N" para não');
-                    exibirMenu();
+                    iniciarMenu();
                 }
             });
         } else {
             console.log('Número inválido.');
-            exibirMenu();
+            iniciarMenu();
         }
     });
 }
@@ -91,7 +90,7 @@ function excluirAtivoFixoSelecionado(tabela, tipoAtivo, results) {
     rl.question('Qual o número do ativo que você deseja excluir? ', function(numero) {
         if (numero.trim() === '') {
             console.log('Nenhum ativo excluído!');
-            return exibirMenu();
+            return iniciarMenu();
         }
 
         const index = parseInt(numero) - 1;
@@ -108,19 +107,19 @@ function excluirAtivoFixoSelecionado(tabela, tipoAtivo, results) {
                         } else {
                             console.log(`O investimento ${ativoSelecionado.nome} em ${tabela} foi excluúdo com sucesso!`);
                         }
-                        exibirMenu();
+                        iniciarMenu();
                     });
                 } else if (confirmacao.toUpperCase() === 'N') {
                     console.log('Nenhum ativo excluído!');
-                    exibirMenu();
+                    iniciarMenu();
                 } else {
                     console.log('Nenhum ativo excluído!');
-                    exibirMenu();
+                    iniciarMenu();
                 }
             });
         } else {
             console.log('Número inválido.');
-            exibirMenu();
+            iniciarMenu();
         }
     });
 }

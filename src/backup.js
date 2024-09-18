@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const db = require('./database.js');
 const rl = require('./readline.js');
+const { iniciarMenu } = require('./menu.js');
 
 
 const fazerBackup = function () {
@@ -20,14 +21,14 @@ const fazerBackup = function () {
     exec(dumpCommand, {env: {PGPASSWORD: db.password } }, (error, stout, stderr) => {
         if (error) {
             console.error(`Erro ao fazer backup: ${error.message}`);
-            exibirMenu(rl);
+            iniciarMenu(rl);
             return;
         }
         if (stderr) {
             console.error(`stderr: ${stderr}`);
         }
         console.log(`Backup realizado com sucesso em: ${backupFile}`);
-        exibirMenu(rl);
+        iniciarMenu(rl);
     });
 };
 

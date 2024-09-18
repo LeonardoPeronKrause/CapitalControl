@@ -78,12 +78,12 @@ function editarAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
 
                                 // Adiciona a atualização do nome se o novo nome não estiver em branco.
                                 if (novoNome.trim() !== '') {
-                                    updates.push('nome = ?');
+                                    updates.push('nome = $' + (params.length + 1));
                                     params.push(novoNome);
                                 }
                                 // Adiciona a atualização do ticker se o novo ticker não estiver em branco.
                                 if (novoTicker.trim() !== '') {
-                                    updates.push('ticker = ?');
+                                    updates.push('ticker = $' + (params.length + 1));
                                     params.push(novoTicker);
                                 }
 
@@ -91,26 +91,26 @@ function editarAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
                                 if (novoPm.trim() !== '') {
                                     // Converte o novo preço médio para float, trocando ',' por '.'
                                     const precoMedio = parseFloat(novoPm.replace(',', '.'));
-                                    updates.push('pm = ?');
+                                    updates.push('pm = $' + (params.length + 1));
                                     params.push(precoMedio);
                                 }
 
                                 // Adiciona a atualização do setor se o novo setor não estiver em branco.
                                 if (novoSetor.trim() !== '') {
-                                    updates.push('setor = ?');
+                                    updates.push('setor = $' + (params.length + 1));
                                     params.push(novoSetor);
                                 }
 
                                 // Adiciona a atualização da quantidade se a nova quantidade não estiver em branco.
                                 if (novaQuantidade.trim() !== '') {
-                                    updates.push('quantidade = ?');
-                                    params.push(novaQuantidade);
+                                    updates.push('quantidade = $' + (params.length + 1));
+                                    params.push(parseInt(novaQuantidade));
                                 }
 
                                 // Se houver atualizações a serem feitas, executa a query de atualização.
                                 if (updates.length > 0) {
                                     params.push(ativoSelecionado.id); // Adiciona o ID do ativo à lista de parâmetros.
-                                    const updateQuery = `UPDATE ${tabela} SET ${updates.join(', ')} WHERE id = ?`; // Monta a query de atualização.
+                                    const updateQuery = `UPDATE ${tabela} SET ${updates.join(', ')} WHERE id = $${params.length}`; // Monta a query de atualização.
 
                                     // Executa a query no banco de dados.
                                     db.query(updateQuery, params, (err) => {
@@ -123,8 +123,8 @@ function editarAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
                                     });
                                 } else {
                                     console.log('Nenhuma atualização realizada.'); // Mensagem se não houver atualizações.
-                                    iniciarMenu(); // Retorna ao menu
                                 }
+                                iniciarMenu(); // Retorna ao menu
                             });
                         });
                     });
@@ -158,36 +158,36 @@ function editarAtivoFixoSelecionado(tabela, tipoAtivo, results) {
 
                                 // Adiciona a atualização do nome se o novo nome não estiver em branco.
                                 if (novoNome.trim() !== '') {
-                                    updates.push('nome = ?');
+                                    updates.push('nome = $' + (params.length + 1));
                                     params.push(novoNome);
                                 }
                                 // Adiciona a atualização do preço médio se o novo preço não estiver em branco.
                                 if (novoPm.trim() !== '') {
                                     // Converte o novo preço médio para float, trocando ',' por '.'.
                                     const precoMedio = parseFloat(novoPm.replace(',', '.'));
-                                    updates.push('pm = ?');
+                                    updates.push('pm = $' + (params.length + 1));
                                     params.push(precoMedio);
                                 }
                                 // Adiciona a atualização da data de vencimento se a nova data não estiver em branco.
                                 if (novoVencimento.trim() !== '') {
-                                    updates.push('vencimento = ?');
+                                    updates.push('vencimento = $' + (params.length + 1));
                                     params.push(novoVencimento);
                                 }
                                 // Adiciona a atualização da quantidade se a nova quantidade não estiver em branco.
                                 if (novaQuantidade.trim() !== '') {
-                                    updates.push('quantidade = ?');
+                                    updates.push('quantidade = $' + (params.length + 1));
                                     params.push(novaQuantidade);
                                 }
                                 // Adiciona a atualização da taxa de juros se a nova taxa não estiver em branco.
                                 if (novaTaxa.trim() !== '') {
-                                    updates.push('taxaJuros = ?');
+                                    updates.push('taxaJuros = $' + (params.length + 1));
                                     params.push(novaTaxa);
                                 }
 
                                 // Se houver atualizações a serem feitas, executa a query de atualização.
                                 if (updates.length > 0) {
                                     params.push(ativoSelecionado.id); // Adiciona o ID do ativo à lista de parâmetros.
-                                    const updateQuery = `UPDATE ${tabela} SET ${updates.join(', ')} WHERE id = ?`; // Monta a query de atualização.
+                                    const updateQuery = `UPDATE ${tabela} SET ${updates.join(', ')} WHERE id = $${params.length}`; // Monta a query de atualização.
 
                                     // Executa a query no banco de dados.
                                     db.query(updateQuery, params, (err) => {
@@ -200,8 +200,8 @@ function editarAtivoFixoSelecionado(tabela, tipoAtivo, results) {
                                     });
                                 } else {
                                     console.log('Nenhuma atualização realizada.'); // Mensagem se não houver atualizações.
-                                    iniciarMenu(); // Retorna ao menu
                                 }
+                                iniciarMenu(); // Retorna ao menu
                             });
                         });
                     });
