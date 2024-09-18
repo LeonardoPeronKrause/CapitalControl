@@ -3,7 +3,6 @@
 const rl = require('./readline');
 const { exclusaoRendaFixa } = require('./exclusao');
 const { exclusaoRendaVariavel } = require('./exclusao');
-const { sair } = require('./sair');
 const { iniciarMenu } = require('./menu');
 
 function exibirMenuExclusao() {
