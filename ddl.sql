@@ -61,7 +61,9 @@ create table cdi (
 	taxaJuros decimal(5,0) not null
 )
 
-/*
-alter table cdi
-alter column taxaJuros type decimal(5,0)
-*/
+// Adicionando a coluna 'valorInvestido' nas tabelas 
+ALTER table {nome da tabela}
+add column valorInvestido decimal(10,2)
+
+update {nome da tabela}
+set valorInvestido = quantidade * pm

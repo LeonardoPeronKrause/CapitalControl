@@ -32,6 +32,7 @@ function formatarResultadoRV(ativos) {
             console.log(`  Preço Médio: R$ ${ativo.pm}`);
             console.log(`  Setor: ${ativo.setor}`);
             console.log(`  Quantidade: ${ativo.quantidade}`);
+            console.log(`  Valor Investido: ${ativo.valorInvestido}`)
             console.log('------------------------');
         });
     }
