@@ -1,8 +1,8 @@
 'use strict';
 
-const rl = require('./readline');
-const db = require('./database');
-const { iniciarMenu } = require('./menu');
+const rl = require('./readline.js');
+const db = require('./database.js');
+const { iniciarMenu } = require('./menu.js');
 
 function exclusaoRendaVariavel(tabela, tipoAtivo) {
     const query = `SELECT * FROM ${tabela}`;
@@ -62,7 +62,7 @@ function excluirAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
 
             rl.question(`Você tem certeza que deseja excluir o ativo ${ativoSelecionado.nome}? [Use = S para sim/N para não]: `, function(confirmacao) {
                 if (confirmacao.toUpperCase() === 'S') {
-                    const deleteQuery = `DELETE FROM ${tabela} WHERE id = ?`;
+                    const deleteQuery = `DELETE FROM ${tabela} WHERE id = $1`;
                     db.query(deleteQuery, [ativoSelecionado.id], (err) => {
                         if (err) {
                             console.log('Erro ao excluir o ativo!', err.message);
@@ -99,8 +99,8 @@ function excluirAtivoFixoSelecionado(tabela, tipoAtivo, results) {
             const ativoSelecionado = results.rows[index];
 
             rl.question(`Você tem certeza que deseja excluir o investimento ${ativoSelecionado.nome} de ${tipoAtivo}? [Use S para sim/N para não]: `, function(confirmacao) {
-                if (confirmacao.toUpperCase() === 'S') {
-                    const deleteQuery = `DELETE FROM ${tabela} WHERE ID = ?`;
+                if (confirmacao.trim().toUpperCase() === 'S') {
+                    const deleteQuery = `DELETE FROM ${tabela} WHERE ID = $1`;
                     db.query(deleteQuery, [ativoSelecionado.id], (err) => {
                         if (err) {
                             console.log('Erro ao excluir o ativo!', err.message);
@@ -109,7 +109,7 @@ function excluirAtivoFixoSelecionado(tabela, tipoAtivo, results) {
                         }
                         iniciarMenu();
                     });
-                } else if (confirmacao.toUpperCase() === 'N') {
+                } else if (confirmacao.trim().toUpperCase() === 'N') {
                     console.log('Nenhum ativo excluído!');
                     iniciarMenu();
                 } else {

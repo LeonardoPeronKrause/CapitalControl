@@ -6,10 +6,10 @@ const { perguntarDados } = require('./utils.js');
 const { iniciarMenu } = require('./menu.js');
 
 const cadastrarAtivo = function(callback) {
-    rl.question('1. Renda Variável\n2. Renda Fixa\nQual a categoria de ativo que você deseja cadastrar? ', function(opcao) {
+    rl.question('1. Renda Variável\n2. Renda Fixa\n3. Voltar ao Menu\nQual a categoria de ativo que você deseja cadastrar? ', function(opcao) {
         switch (opcao) {
             case '1':
-                rl.question('1. Ação Brasileira\n2. Fundo Imobiliário\n3. Ação Americana (BDR)\n4. Criptoativos\n Qual dos segmentos você deseja cadastrar? ', function(opcao) {
+                rl.question('1. Ação Brasileira\n2. Fundo Imobiliário\n3. Ação Americana (BDR)\n4. Criptoativos\n5. Voltar ao Menu\nQual dos segmentos você deseja cadastrar? ', function(opcao) {
                     switch (opcao) {
                         case '1':
                             cadastrarAcaoBrasileira(callback);
@@ -23,6 +23,9 @@ const cadastrarAtivo = function(callback) {
                         case '4':
                             cadastrarCriptoativo(callback);
                             break;
+                        case '5':
+                            iniciarMenu();
+                            break;
                         default:
                             console.log('Opção inválida. Tente novamente...');
                             cadastrarAtivo(callback);
@@ -31,7 +34,7 @@ const cadastrarAtivo = function(callback) {
                 });
                 break;
             case '2':
-                rl.question('1. Selic\n2. IPCA\n3. CDI\nQual o indexador do seu investimento em renda fixa? ', function(opcao) {
+                rl.question('1. Selic\n2. IPCA\n3. CDI\n4. Voltar ao Menu\nQual o indexador do seu investimento em renda fixa? ', function(opcao) {
                     switch (opcao) {
                         case '1':
                             cadastrarRFSelic(callback);
@@ -42,12 +45,18 @@ const cadastrarAtivo = function(callback) {
                         case '3':
                             cadastrarRFCDI(callback);
                             break;
+                        case '4':
+                            iniciarMenu();
+                            break
                         default:
                             console.log('Opção inválida. Tente novamente...');
                             cadastrarAtivo(callback);
                             break;
                     }
                 });
+                break;
+            case '3':
+                iniciarMenu();
                 break;
             default:
                 console.log('Opção inválida. Tente novamente...')

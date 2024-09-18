@@ -40,10 +40,10 @@ function formatarResultadoRV(ativos) {
 // Função para visualizar os ativos de investimento
 const verAtivos = function(callback) {
     // Pergunta ao usuário qual tipo de investimento deseja ver
-    rl.question('1. Renda Variável\n2. Renda Fixa\n3. Voltar Menu\nQual investimento você quer ver: ', function(opcao) {
+    rl.question('1. Renda Variável\n2. Renda Fixa\n3. Voltar ao Menu\nQual investimento você quer ver: ', function(opcao) {
         switch (opcao) {
             case '1': // Renda Variável
-                rl.question('1. Ação Brasileira\n2. Fundo Imobiliário\n3. Ação Americana (BDR)\n4. Criptoativos\nEscolha o ativo que você deseja visualizar: ', function(opcao) {
+                rl.question('1. Ação Brasileira\n2. Fundo Imobiliário\n3. Ação Americana (BDR)\n4. Criptoativos\n5. Voltar ao Menu\nEscolha o ativo que você deseja visualizar: ', function(opcao) {
                     switch (opcao) {
                         case '1':
                             const queryAcao = 'SELECT * FROM acoes';
@@ -89,6 +89,9 @@ const verAtivos = function(callback) {
                                 verAtivos(callback); // Exibe o menu após a consulta
                             });
                             break;
+                        case '5':
+                            iniciarMenu();
+                            break;
                         default:
                             console.log('Opção inválida. Tente novamente...');
                             verAtivos(); // Permite ao usuário tentar novamente
@@ -97,7 +100,7 @@ const verAtivos = function(callback) {
                 });
                 break;
             case '2': // Renda Fixa
-                rl.question('1. Selic\n2. IPCA\n3. CDI\nEscolha qual o indexador da renda fixa que você deseja visualizar: ', function(opcao) {
+                rl.question('1. Selic\n2. IPCA\n3. CDI\n4. Voltar ao Menu\nEscolha qual o indexador da renda fixa que você deseja visualizar: ', function(opcao) {
                     switch (opcao) {
                         case '1':
                             const querySelic = 'SELECT * FROM selic';
@@ -131,6 +134,9 @@ const verAtivos = function(callback) {
                                 }
                                 verAtivos(callback); // Exibe o menu após a consulta
                             });
+                            break;
+                        case '4':
+                            iniciarMenu();
                             break;
                         default:
                             console.log('Opção inválida. Tente novamente...');

@@ -15,7 +15,7 @@ function exibirMenuExclusao() {
     console.log('5. Excluir Ativo de Selic');
     console.log('6. Excluir Ativo de IPCA');
     console.log('7. Excluir Ativo de CDI');
-    console.log('8. Sair');
+    console.log('8. Voltar ao Menu');
 
     rl.question('Escolha uma opçao: ', (opcao) => {
         switch (opcao) {
@@ -41,7 +41,7 @@ function exibirMenuExclusao() {
                 exclusaoRendaFixa('cdi', 'CDI');
                 break;
             case '8':
-                sair();
+                iniciarMenu();
                 break;
             default:
                 console.log('Opção inválida. Tente novamente.');

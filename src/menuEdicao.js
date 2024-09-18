@@ -14,7 +14,7 @@ function exibirMenuEdicao() {
     console.log('5. Editar Ativos de Selic');
     console.log('6. Editar Ativos de IPCA');
     console.log('7. Editar Ativos de CDI');
-    console.log('8. Sair');
+    console.log('8. Voltar ao Menu');
 
     // Solicita a opção escolhida pelo usuário
     rl.question('Escolha uma opção: ', (opcao) => {
