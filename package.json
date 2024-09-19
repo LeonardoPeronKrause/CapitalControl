@@ -1,8 +1,15 @@
 {
   "dependencies": {
+    "dotenv": "^16.4.5",
     "dump": "^1.0.1",
     "express": "^4.19.2",
     "node": "^22.6.0",
     "pg": "^8.12.0"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

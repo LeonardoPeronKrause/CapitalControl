@@ -1,14 +1,16 @@
 'use strict';
 
+require('dotenv').config();
+
 const { Pool } = require('pg');
 
 // Cria uma nova instância do Pool p gerenciar as conexoes c o db 
 const pool = new Pool ({
-    user: 'postgres',       // nome de usuário
-    host: 'localhost',      // endereço do servidor do db
-    database: 'leonardo',   // nome do db
-    password: '1234',       // senha do usuário do db
-    port: 5432              // porta do servidor 
+    user: process.env.DB_USER,          // nome de usuário
+    host: process.env.DB_HOST,          // endereço do servidor do db
+    database: process.env.DB_DATABASE,  // nome do db
+    password: process.env.DB_PASSWORD,  // senha do usuário do db
+    port: process.env.DB_PORT           // porta do servidor 
 });
 
 // Função para realizar consulta ao banco de dados
@@ -33,10 +35,5 @@ const executarQuery = function(query, values, mensagemSucesso, callback) {
 // Exporta as funções query e executarQuery
 module.exports = {
     query,
-    executarQuery,
-    user: 'seu_usuario',
-    host: 'localhost',
-    database: 'seu_banco',
-    password: 'sua_senha',
-    port: 5432
+    executarQuery
 }
