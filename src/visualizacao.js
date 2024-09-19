@@ -10,12 +10,14 @@ function formatarResultadoRF(ativos) {
         console.log('Nenhum ativo encontrado.');
     } else {
         ativos.rows.forEach((ativo, index) => {
+            const valorInvestido = ativo.pm * ativo.quantidade;
             console.log(`Ativo ${index + 1}`);
             console.log(`  Nome: ${ativo.nome}`);
             console.log(`  Preço Médio: ${ativo.pm}`);
             console.log(`  Vencimento: ${ativo.vencimento}`);
             console.log(`  Quantidade: ${ativo.quantidade}`);
             console.log(`  Taxa de Juros: ${ativo.taxajuros} %`);
+            console.log(`  Valor Investido: R$ ${valorInvestido}`)
             console.log(`------------------------`);
         });
     }
@@ -26,13 +28,14 @@ function formatarResultadoRV(ativos) {
         console.log('Nenhum ativo encontrado.');
     } else {
         ativos.rows.forEach((ativo, index) => {
+            const valorInvestido = ativo.pm * ativo.quantidade;
             console.log(`Ativo ${index + 1}:`);
             console.log(`  Nome: ${ativo.nome}`);
             console.log(`  Ticker: ${ativo.ticker}`);
             console.log(`  Preço Médio: R$ ${ativo.pm}`);
             console.log(`  Setor: ${ativo.setor}`);
             console.log(`  Quantidade: ${ativo.quantidade}`);
-            console.log(`  Valor Investido: ${ativo.valorInvestido}`)
+            console.log(`  Valor Investido: R$ ${valorInvestido}`)
             console.log('------------------------');
         });
     }

@@ -24,10 +24,7 @@ const fazerBackup = function () {
             iniciarMenu(rl);
             return;
         }
-        if (stderr) {
-            console.error(`stderr: ${stderr}`);
-        }
-        console.log(`Backup realizado com sucesso em: ${backupFile}`);
+        console.log(`Backup realizado com sucesso: ${stout}`);
         iniciarMenu(rl);
     });
 };

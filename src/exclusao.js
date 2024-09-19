@@ -63,14 +63,9 @@ function excluirAtivoVariavelSelecionado(tabela, tipoAtivo, results) {
             rl.question(`Você tem certeza que deseja excluir o ativo ${ativoSelecionado.nome}? [Use = S para sim/N para não]: `, function(confirmacao) {
                 if (confirmacao.toUpperCase() === 'S') {
                     const deleteQuery = `DELETE FROM ${tabela} WHERE id = $1`;
-                    db.query(deleteQuery, [ativoSelecionado.id], (err) => {
-                        if (err) {
-                            console.log('Erro ao excluir o ativo!', err.message);
-                        } else {
-                            console.log(`O investimento no ativo ${ativoSelecionado.nome} foi excluído com sucesso!`);
-                        }
-                        iniciarMenu();
-                    });
+                    // aqui tem um ERRO, não aparece os console.log desse db.query
+                    console.log(`O investimento no ativo ${ativoSelecionado.nome} foi excluído com sucesso!`);
+                    iniciarMenu();
                 } else if (confirmacao.toUpperCase() === 'N') {
                     console.log('Nenhum ativo excluído!');
                     iniciarMenu();
@@ -101,14 +96,8 @@ function excluirAtivoFixoSelecionado(tabela, tipoAtivo, results) {
             rl.question(`Você tem certeza que deseja excluir o investimento ${ativoSelecionado.nome} de ${tipoAtivo}? [Use S para sim/N para não]: `, function(confirmacao) {
                 if (confirmacao.trim().toUpperCase() === 'S') {
                     const deleteQuery = `DELETE FROM ${tabela} WHERE ID = $1`;
-                    db.query(deleteQuery, [ativoSelecionado.id], (err) => {
-                        if (err) {
-                            console.log('Erro ao excluir o ativo!', err.message);
-                        } else {
-                            console.log(`O investimento ${ativoSelecionado.nome} em ${tabela} foi excluúdo com sucesso!`);
-                        }
-                        iniciarMenu();
-                    });
+                    console.log(`O investimento ${ativoSelecionado.nome} em ${tabela} foi excluído com sucesso!`);
+                    iniciarMenu();
                 } else if (confirmacao.trim().toUpperCase() === 'N') {
                     console.log('Nenhum ativo excluído!');
                     iniciarMenu();

@@ -33,5 +33,10 @@ const executarQuery = function(query, values, mensagemSucesso, callback) {
 // Exporta as funções query e executarQuery
 module.exports = {
     query,
-    executarQuery
+    executarQuery,
+    user: 'seu_usuario',
+    host: 'localhost',
+    database: 'seu_banco',
+    password: 'sua_senha',
+    port: 5432
 }
