@@ -34,9 +34,9 @@ const executarQuery = function(query, values, mensagemSucesso, callback) {
 module.exports = {
     query,
     executarQuery,
-    user: 'seu_usuario',
+    user: 'postgres',
     host: 'localhost',
-    database: 'seu_banco',
-    password: 'sua_senha',
+    database: 'leonardo',
+    password: '1234',
     port: 5432
 }
