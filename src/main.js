@@ -6,4 +6,4 @@ function main() {
     iniciarMenu();
 };
 
-module.exports = { main };
+main();

@@ -1,5 +1,3 @@
 'use strict';
 
-const { main } = require('./main.js');
-
-main();
+//dados da API (Alpha VANTAGE)
