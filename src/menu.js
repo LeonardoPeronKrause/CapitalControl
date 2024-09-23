@@ -9,7 +9,8 @@ const exibirMenu = function(callback) {
     console.log('3. Editar Ativo');
     console.log('4. Excluir Ativo');
     console.log('5. Fazer Backup');
-    console.log('6. Sair');
+    console.log('6. Consultar Preço De Um Atual Ativo');
+    console.log('7. Sair');
 
     rl.question('Escolha uma opção: ', (opcao) => {
         callback(opcao);
@@ -40,6 +41,10 @@ const iniciarMenu = function() {
                 fazerBackup(iniciarMenu);
                 break;
             case '6':
+                const { buscarCotacao } = require('./app.js');
+                buscarCotacao(iniciarMenu);
+                break;
+            case '7':
                 const { sair } = require('./sair.js');
                 sair();
                 rl.close(); // Fecha a interface readline
