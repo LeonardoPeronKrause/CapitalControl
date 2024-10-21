@@ -1,9 +1,9 @@
 'use strict';
 
-const rl = require('./readline');
-const { exclusaoRendaFixa } = require('./exclusao');
-const { exclusaoRendaVariavel } = require('./exclusao');
-const { iniciarMenu } = require('./menu');
+const rl = require('../utils/readline');
+const { exclusaoRendaFixa } = require('../exclusao');
+const { exclusaoRendaVariavel } = require('../exclusao');
+const { iniciarMenu } = require('../menu/menu');
 
 function exibirMenuExclusao() {
     console.log('=== Menu de Exclusão ===');

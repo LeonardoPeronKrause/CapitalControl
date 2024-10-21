@@ -1,8 +1,8 @@
 'use strict';
 
-const rl = require('./readline');
-const { edicaoRendaVariavel } = require('./edicao');
-const { edicaoRendaFixa } = require('./edicao');
+const rl = require('../readline');
+const { edicaoRendaVariavel } = require('../edicao');
+const { edicaoRendaFixa } = require('../edicao');
 const { iniciarMenu } = require('./menu');
 
 function exibirMenuEdicao() {
