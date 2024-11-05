@@ -4,7 +4,7 @@
 
 CapitalControl é um programa completo para gerenciar e monitorar seus investimentos em ações, fundos imobiliários, moedas, renda fixa e criptomoedas. Com uma interface amigável e intuitiva, ele oferece funcionalidades CRUD (Criar, Ler, Atualizar, Excluir), facilitando o acompanhamento do desempenho de seus investimentos. Além disso, o sistema é integrado a uma API de cotações em tempo real, garantindo que você sempre tenha as informações mais atualizadas para tomar decisões informadas.
 
-## Funcionalidades
+## Funcionalidades:
 
 - **Cadastro de Investimentos**: Adicione novas ações, fundos imobiliários e aplicações de renda fixa, etc.
 - **Atualização de Investimentos**: Atualize informações como preço médio, preço atual, calcule a porcentagem de ganho ou perda, etc.
