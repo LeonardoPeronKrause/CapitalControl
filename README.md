@@ -11,7 +11,7 @@ CapitalControl é um programa completo para gerenciar e monitorar seus investime
 - **Visualização de Investimentos**: Consulte todos os investimentos cadastrados com detalhes de preço médio, preço atual, status de ganho ou perda, etc.
 - **Exclusão de Investimentos**: Remova investimentos que não são mais necessários ou desejados.
 
-## Tecnologias Utilizadas
+## Tecnologias Utilizadas:
 
 - Linguagem de Programação: Node.js
 - Banco de Dados: MySQL
