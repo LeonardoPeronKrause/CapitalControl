@@ -1,7 +1,7 @@
 'use strict';
 
 // Importa os módulos necessários
-const db = require('./database.js');    // Módulo p interagir c o db
+const db = require('./back/database.js');    // Módulo p interagir c o db
 const rl = require('./readline.js');    // Módulo p manipulação da entrada de dados via terminal
 const { iniciarMenu } = require('./menu.js');  // Já está importado aqui
 

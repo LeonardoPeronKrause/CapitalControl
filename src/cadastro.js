@@ -1,6 +1,6 @@
 'use strict';
 
-const db = require('./database.js');
+const db = require('./back/database.js');
 const rl = require('./readline.js');
 const { perguntarDados } = require('./utils.js');
 const { iniciarMenu } = require('./menu.js');

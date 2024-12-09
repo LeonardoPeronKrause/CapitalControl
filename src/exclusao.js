@@ -1,7 +1,7 @@
 'use strict';
 
 const rl = require('./readline.js');
-const db = require('./database.js');
+const db = require('./back/database.js');
 const { iniciarMenu } = require('./menu.js');
 
 function exclusaoRendaVariavel(tabela, tipoAtivo) {

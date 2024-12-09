@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CapitalControl</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>CapitalControl</h1>
+  </header>
+  
+  <main>
+    <section id="cadastro">
+      <h2>Cadastrar Ativo</h2>
+      <form id="form-cadastro">
+        <div class="form-group">
+          <label for="nome">Nome do Ativo:</label>
+          <input type="text" id="nome" name="nome" placeholder="Digite o nome do ativo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="ticker">Ticker:</label>
+          <input type="text" id="ticker" name="ticker" placeholder="Ex: PETR4" required>
+        </div>
+
+        <div class="form-group">
+          <label for="tipo">Tipo:</label>
+          <select id="tipo" name="tipo">
+            <option value="renda_variavel">Renda Variável</option>
+            <option value="renda_fixa">Renda Fixa</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pm">Preço Médio:</label>
+          <input type="number" id="pm" name="pm" placeholder="Ex: 14.59" required>
+        </div>
+
+        <div class="form-group">
+          <label for="quantidade">Quantidade:</label>
+          <input type="number" id="quantidade" name="quantidade" placeholder="100" required>
+        </div>
+
+        <button type="submit" class="btn-cadastrar">Cadastrar</button>
+      </form>
+    </section>
+    
+    <section id="visualizacao">
+      <h2>Lista de Ativos</h2>
+      <ul id="lista-ativos" class="ativos-lista">
+        <!-- Os ativos serão inseridos aqui -->
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CapitalControl. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

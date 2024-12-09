@@ -2,7 +2,7 @@
 
 // Importa os módulos necessários
 const rl = require('./readline'); // Módulo para leitura de entradas do usuário
-const db = require('./database'); // Módulo para interação com o banco de dados
+const db = require('./back/database'); // Módulo para interação com o banco de dados
 const { iniciarMenu } = require('./menu');
 
 // Função para editar ativos de renda variável
